@@ -4,6 +4,8 @@
  */
 package vista;
 
+import java.awt.Dimension;
+
 /**
  *
  * @author LENOVO
@@ -15,6 +17,8 @@ public class JInternalFrameRegSalida extends javax.swing.JInternalFrame {
      */
     public JInternalFrameRegSalida() {
         initComponents();
+        this.setSize(new Dimension(400, 460));
+        this.setTitle("Registrar Salida");
     }
 
     /**
@@ -26,21 +30,175 @@ public class JInternalFrameRegSalida extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        txtApellidosNUsuario = new javax.swing.JTextField();
+        txtNombresNUsuario = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        txtApellidosNUsuario1 = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        txtApellidosNUsuario2 = new javax.swing.JTextField();
+
+        jPanel1.setLayout(null);
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel1.setText("Registra Salida");
+        jPanel1.add(jLabel1);
+        jLabel1.setBounds(120, 0, 170, 32);
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel2.setText("Cliente:");
+        jPanel1.add(jLabel2);
+        jLabel2.setBounds(20, 50, 45, 20);
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel3.setText("Fecha:");
+        jPanel1.add(jLabel3);
+        jLabel3.setBounds(20, 80, 38, 20);
+
+        txtApellidosNUsuario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtApellidosNUsuarioKeyTyped(evt);
+            }
+        });
+        jPanel1.add(txtApellidosNUsuario);
+        txtApellidosNUsuario.setBounds(200, 80, 180, 22);
+
+        txtNombresNUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNombresNUsuarioActionPerformed(evt);
+            }
+        });
+        txtNombresNUsuario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNombresNUsuarioKeyTyped(evt);
+            }
+        });
+        jPanel1.add(txtNombresNUsuario);
+        txtNombresNUsuario.setBounds(200, 50, 180, 22);
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel4.setText("IdEntrada:");
+        jPanel1.add(jLabel4);
+        jLabel4.setBounds(20, 140, 90, 20);
+
+        txtApellidosNUsuario1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtApellidosNUsuario1KeyTyped(evt);
+            }
+        });
+        jPanel1.add(txtApellidosNUsuario1);
+        txtApellidosNUsuario1.setBounds(200, 140, 180, 22);
+
+        jButton1.setText("REGISTRAR");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton1);
+        jButton1.setBounds(140, 170, 120, 23);
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel5.setText("Hora:");
+        jPanel1.add(jLabel5);
+        jLabel5.setBounds(20, 110, 90, 20);
+
+        txtApellidosNUsuario2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtApellidosNUsuario2KeyTyped(evt);
+            }
+        });
+        jPanel1.add(txtApellidosNUsuario2);
+        txtApellidosNUsuario2.setBounds(200, 110, 180, 22);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 394, Short.MAX_VALUE)
+            .addGap(0, 422, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 274, Short.MAX_VALUE)
+            .addGap(0, 223, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void txtApellidosNUsuarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApellidosNUsuarioKeyTyped
+        String text= txtApellidosNUsuario.getText();//texto actual
+        int lim=30;
+        if(text.length()>= lim) evt.consume();
+
+        char c= evt.getKeyChar();//c= caracter actual
+        // Permite solo letras
+        if (!Character.isLetter(c) && c != ' ') {
+            evt.consume();
+            return;
+        }
+        // Permite máximo un espacio
+        if (c == ' ' && text.contains(" ")) {
+            evt.consume();
+        }
+
+    }//GEN-LAST:event_txtApellidosNUsuarioKeyTyped
+
+    private void txtNombresNUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombresNUsuarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNombresNUsuarioActionPerformed
+
+    private void txtNombresNUsuarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombresNUsuarioKeyTyped
+        String text= txtNombresNUsuario.getText();//texto actual
+        int lim=30;
+        if(text.length()>= lim) evt.consume();
+
+        char c= evt.getKeyChar();//c= caracter actual
+        // Permite solo letras
+        if (!Character.isLetter(c) && c != ' ') {
+            evt.consume();
+            return;
+        }
+        // Permite máximo un espacio
+        if (c == ' ' && text.contains(" ")) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtNombresNUsuarioKeyTyped
+
+    private void txtApellidosNUsuario1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApellidosNUsuario1KeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtApellidosNUsuario1KeyTyped
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void txtApellidosNUsuario2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApellidosNUsuario2KeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtApellidosNUsuario2KeyTyped
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JTextField txtApellidosNUsuario;
+    private javax.swing.JTextField txtApellidosNUsuario1;
+    private javax.swing.JTextField txtApellidosNUsuario2;
+    private javax.swing.JTextField txtNombresNUsuario;
     // End of variables declaration//GEN-END:variables
 }

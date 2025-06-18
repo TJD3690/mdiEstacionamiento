@@ -431,7 +431,7 @@ public class frmLogin extends javax.swing.JFrame {
         if(!txtUsuario.getText().isEmpty() && !txtPassword.getText().isEmpty()){
             control_Usuario ctrlUsuario=new control_Usuario();
             Empleado emp =new Empleado();
-            emp.setNombres(txtUsuario.getText().trim());
+            emp.setUsuario(txtUsuario.getText().trim());
             emp.setPassword(txtPassword.getText().trim());
             if(ctrlUsuario.loginExiste(emp)){
                 JOptionPane.showMessageDialog(null,"Inicio de sesion correcto...");

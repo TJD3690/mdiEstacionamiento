@@ -19,7 +19,7 @@ public class control_Usuario {
         boolean rspta=false;
         
         Connection cn = Conexion.establecerConexion();
-        String sql = "select Nombres,Password from Empleado where Nombres='"+emp.getNombres()+"' and Password='"+emp.getPassword()+"'";        
+        String sql = "select Usuario,Password from Empleado where Usuario='"+emp.getUsuario()+"' and Password='"+emp.getPassword()+"'";        
         Statement st;
         try{
             

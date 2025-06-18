@@ -3,15 +3,8 @@ package vista;
 import java.awt.Dimension;
 import javax.swing.JDesktopPane;
 
-/**
- *
- * @author LENOVO
- */
 public class MenuPrincipal extends javax.swing.JFrame {
 
-    /**
-     * Creates new form MenuPrincipal
-     */
     public static JDesktopPane JDesktopPane_menu; 
     
      
@@ -53,6 +46,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jCerrarSesion = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(600, 400));
 
         jTablas.setText("TABLAS");
         jTablas.setPreferredSize(new java.awt.Dimension(150, 25));
@@ -132,7 +126,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTablaEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTablaEmpleadosActionPerformed
-        // TODO add your handling code here:
+        JInternalFrameTablaEmpleados interGestEmp= new JInternalFrameTablaEmpleados();
+        JDesktopPane_menu.add(interGestEmp);
+        interGestEmp.setVisible(true);
     }//GEN-LAST:event_jTablaEmpleadosActionPerformed
 
     private void jRegistrarEntradaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRegistrarEntradaActionPerformed
@@ -143,7 +139,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jRegistrarEntradaActionPerformed
 
     private void jTablaClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTablaClientesActionPerformed
-        // TODO add your handling code here:
+       JInternalFrameTablaClientes interGestClientes= new JInternalFrameTablaClientes();
+        JDesktopPane_menu.add(interGestClientes);
+        interGestClientes.setVisible(true);
     }//GEN-LAST:event_jTablaClientesActionPerformed
 
     private void jRegistrarNuevoUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRegistrarNuevoUsuarioActionPerformed
