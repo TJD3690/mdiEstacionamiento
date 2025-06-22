@@ -39,27 +39,27 @@ public class JInternalFrameTablaClientes extends javax.swing.JInternalFrame {
         jButton2 = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        txtApellidosNClientes = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        txtNombresCliente = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jTextField6 = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        jTextField7 = new javax.swing.JTextField();
+        txtContraNCliente = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        jTextField8 = new javax.swing.JTextField();
+        txtNumDocNCliente = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        jTextField9 = new javax.swing.JTextField();
+        txtTelefonoNCliente = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
-        jTextField10 = new javax.swing.JTextField();
-        jTextField11 = new javax.swing.JTextField();
+        txtCorreoNCliente = new javax.swing.JTextField();
+        cbxDireccionNCliente = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
-        jTextField12 = new javax.swing.JTextField();
+        txtNUsuarioCliente = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
-        jTextField13 = new javax.swing.JTextField();
+        NumLicencia = new javax.swing.JTextField();
+        cbxNacionaNCliente = new javax.swing.JComboBox<>();
 
         setClosable(true);
         setIconifiable(true);
@@ -123,17 +123,33 @@ public class JInternalFrameTablaClientes extends javax.swing.JInternalFrame {
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel4.setText("Apellidos:");
         jPanel6.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, -1, -1));
-        jPanel6.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 180, -1));
+
+        txtApellidosNClientes.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtApellidosNClientesKeyTyped(evt);
+            }
+        });
+        jPanel6.add(txtApellidosNClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 180, -1));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel5.setText("Nombres:");
         jPanel6.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
-        jPanel6.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 180, -1));
+
+        txtNombresCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNombresClienteActionPerformed(evt);
+            }
+        });
+        txtNombresCliente.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNombresClienteKeyTyped(evt);
+            }
+        });
+        jPanel6.add(txtNombresCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 180, -1));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel6.setText("Nacionalidad:");
         jPanel6.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 10, -1, -1));
-        jPanel6.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 30, 180, -1));
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel7.setText("Distrito:");
@@ -143,28 +159,64 @@ public class JInternalFrameTablaClientes extends javax.swing.JInternalFrame {
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel8.setText("Contraseña:");
         jPanel6.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 10, -1, -1));
-        jPanel6.add(jTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 30, 180, -1));
+
+        txtContraNCliente.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtContraNClienteKeyTyped(evt);
+            }
+        });
+        jPanel6.add(txtContraNCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 30, 180, -1));
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel9.setText("Numero de Doc:");
         jPanel6.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 70, -1, -1));
-        jPanel6.add(jTextField8, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 90, 180, -1));
+
+        txtNumDocNCliente.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNumDocNClienteKeyTyped(evt);
+            }
+        });
+        jPanel6.add(txtNumDocNCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 90, 180, -1));
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel10.setText("Teléfono:");
         jPanel6.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 130, -1, -1));
-        jPanel6.add(jTextField9, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 150, 180, -1));
+
+        txtTelefonoNCliente.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtTelefonoNClienteKeyTyped(evt);
+            }
+        });
+        jPanel6.add(txtTelefonoNCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 150, 180, -1));
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel11.setText("Correo:");
         jPanel6.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 70, -1, -1));
-        jPanel6.add(jTextField10, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 90, 180, -1));
-        jPanel6.add(jTextField11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 180, -1));
+
+        txtCorreoNCliente.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCorreoNClienteKeyTyped(evt);
+            }
+        });
+        jPanel6.add(txtCorreoNCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 90, 180, -1));
+
+        cbxDireccionNCliente.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                cbxDireccionNClienteKeyTyped(evt);
+            }
+        });
+        jPanel6.add(cbxDireccionNCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 180, -1));
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel12.setText("Dirección:");
         jPanel6.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, -1, -1));
-        jPanel6.add(jTextField12, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 30, 180, -1));
+
+        txtNUsuarioCliente.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNUsuarioClienteKeyTyped(evt);
+            }
+        });
+        jPanel6.add(txtNUsuarioCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 30, 180, -1));
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel13.setText("Usuario:");
@@ -173,7 +225,16 @@ public class JInternalFrameTablaClientes extends javax.swing.JInternalFrame {
         jLabel14.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel14.setText("Numero de licencia:");
         jPanel6.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 130, -1, -1));
-        jPanel6.add(jTextField13, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 150, 180, -1));
+
+        NumLicencia.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                NumLicenciaKeyTyped(evt);
+            }
+        });
+        jPanel6.add(NumLicencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 150, 180, -1));
+
+        cbxNacionaNCliente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "No Especificado", "Peruana", "Extranjera" }));
+        jPanel6.add(cbxNacionaNCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 30, 180, -1));
 
         jPanel1.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 330, 860, 180));
 
@@ -186,8 +247,161 @@ public class JInternalFrameTablaClientes extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void txtNombresClienteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombresClienteKeyTyped
+        String text= txtNombresCliente.getText();//texto actual
+        int lim=30;
+        if(text.length()>= lim) evt.consume();
+        
+        char c= evt.getKeyChar();//c= caracter actual
+        // Permite solo letras
+        if (!Character.isLetter(c) && c != ' ') {
+        evt.consume();
+        return;
+        }
+        // Permite máximo un espacio
+        if (c == ' ' && text.contains(" ")) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtNombresClienteKeyTyped
+
+    private void txtNombresClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombresClienteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNombresClienteActionPerformed
+
+    private void txtApellidosNClientesKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApellidosNClientesKeyTyped
+        String text= txtApellidosNClientes.getText();//texto actual
+        int lim=30;
+        if(text.length()>= lim) evt.consume();
+        
+        char c= evt.getKeyChar();//c= caracter actual
+        // Permite solo letras
+        if (!Character.isLetter(c) && c != ' ') {
+        evt.consume();
+        return;
+        }
+        // Permite máximo un espacio
+        if (c == ' ' && text.contains(" ")) {
+            evt.consume();
+        }
+        
+    }//GEN-LAST:event_txtApellidosNClientesKeyTyped
+
+    private void txtNUsuarioClienteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNUsuarioClienteKeyTyped
+              String text = txtNUsuarioCliente.getText(); // texto actual
+int lim = 30;
+if (text.length() >= lim) evt.consume();
+
+char c = evt.getKeyChar(); // carácter actual
+
+// Permite solo letras y máximo un espacio
+if (!Character.isLetter(c) && c != ' ') {
+    evt.consume();
+    return;
+}
+
+// Solo se permite un espacio en todo el texto
+if (c == ' ' && text.contains(" ")) {
+    evt.consume();
+}
+
+    }//GEN-LAST:event_txtNUsuarioClienteKeyTyped
+
+    private void txtContraNClienteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtContraNClienteKeyTyped
+                String text = txtContraNCliente.getText();
+int lim = 24;
+if (text.length() >= lim) {
+    evt.consume();
+}
+
+char c = evt.getKeyChar();
+String allowedSymbols = "@_-!.#";
+
+// Permitir letras, números y algunos símbolos comunes
+if (!Character.isLetterOrDigit(c) && allowedSymbols.indexOf(c) == -1) {
+    evt.consume();
+}
+
+    }//GEN-LAST:event_txtContraNClienteKeyTyped
+
+    private void txtTelefonoNClienteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelefonoNClienteKeyTyped
+                String text= txtTelefonoNCliente.getText();
+        int lim=9;
+        if(text.length() >=9) evt.consume();
+        char c=evt.getKeyChar(); //caracter actual
+        if(!(Character.isDigit(c))){evt.consume();}
+    }//GEN-LAST:event_txtTelefonoNClienteKeyTyped
+
+    private void txtCorreoNClienteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCorreoNClienteKeyTyped
+        String text = txtCorreoNCliente.getText(); // texto actual
+int lim = 40;
+if (text.length() >= lim) evt.consume();
+
+char c = evt.getKeyChar(); // carácter actual
+
+// Permitidos: letras, números y símbolos básicos de correo
+String permitidos = "@._-";
+if (!Character.isLetterOrDigit(c) && permitidos.indexOf(c) == -1) {
+    evt.consume();
+}
+    }//GEN-LAST:event_txtCorreoNClienteKeyTyped
+
+    private void cbxDireccionNClienteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cbxDireccionNClienteKeyTyped
+        String text = cbxDireccionNCliente.getText(); // texto actual
+int lim = 50;
+char c = evt.getKeyChar(); // carácter actual
+
+// Limitar longitud
+if (text.length() >= lim) {
+    evt.consume();
+    return;
+}
+
+// Permitir letras, números y un solo espacio entre palabras
+if (!Character.isLetterOrDigit(c) && c != ' ') {
+    evt.consume();
+    return;
+}
+
+// Evitar espacio inicial
+if (text.isEmpty() && c == ' ') {
+    evt.consume();
+    return;
+}
+
+// Evitar más de un espacio seguido
+if (c == ' ' && text.endsWith(" ")) {
+    evt.consume();
+}
+    }//GEN-LAST:event_cbxDireccionNClienteKeyTyped
+
+    private void txtNumDocNClienteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumDocNClienteKeyTyped
+        String text = txtNumDocNCliente.getText();
+int lim = 12; // Ajusta el límite según el tipo de documento
+
+char c = evt.getKeyChar();
+if (text.length() >= lim || !Character.isDigit(c)) {
+    evt.consume();
+}
+    }//GEN-LAST:event_txtNumDocNClienteKeyTyped
+
+    private void NumLicenciaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NumLicenciaKeyTyped
+        String text = NumLicencia.getText(); // texto actual
+int lim = 15;
+if (text.length() >= lim) evt.consume();
+
+char c = evt.getKeyChar(); // carácter actual
+// Permitir solo números y letras, sin espacios ni símbolos
+if (!Character.isLetterOrDigit(c)) {
+    evt.consume();
+}
+
+    }//GEN-LAST:event_NumLicenciaKeyTyped
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField NumLicencia;
+    private javax.swing.JTextField cbxDireccionNCliente;
+    private javax.swing.JComboBox<String> cbxNacionaNCliente;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
@@ -208,16 +422,13 @@ public class JInternalFrameTablaClientes extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableEmpleados;
-    private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextField11;
-    private javax.swing.JTextField jTextField12;
-    private javax.swing.JTextField jTextField13;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
+    private javax.swing.JTextField txtApellidosNClientes;
+    private javax.swing.JTextField txtContraNCliente;
+    private javax.swing.JTextField txtCorreoNCliente;
+    private javax.swing.JTextField txtNUsuarioCliente;
+    private javax.swing.JTextField txtNombresCliente;
+    private javax.swing.JTextField txtNumDocNCliente;
+    private javax.swing.JTextField txtTelefonoNCliente;
     // End of variables declaration//GEN-END:variables
 }

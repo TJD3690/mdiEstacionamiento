@@ -34,25 +34,25 @@ public class JInternalFrameTablaEmpleados extends javax.swing.JInternalFrame {
         jButton2 = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        txtApellidosNEmpleados = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        txtNombresEmpleado = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jTextField6 = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        jTextField7 = new javax.swing.JTextField();
+        txtContraNEmpleado = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        jTextField8 = new javax.swing.JTextField();
+        txtNumDocNEmpleado = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        jTextField9 = new javax.swing.JTextField();
+        txtTelefonoNEmpleado = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
-        jTextField10 = new javax.swing.JTextField();
-        jTextField11 = new javax.swing.JTextField();
+        txtCorreoNCEmpleado = new javax.swing.JTextField();
+        cbxDireccionNEmpleado = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
-        jTextField12 = new javax.swing.JTextField();
+        txtNUsuarioEmpleado = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
+        cbxNacionaNEmpleado = new javax.swing.JComboBox<>();
 
         setClosable(true);
         setIconifiable(true);
@@ -116,17 +116,28 @@ public class JInternalFrameTablaEmpleados extends javax.swing.JInternalFrame {
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel4.setText("Apellidos:");
         jPanel6.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, -1, -1));
-        jPanel6.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 180, -1));
+
+        txtApellidosNEmpleados.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtApellidosNEmpleadosKeyTyped(evt);
+            }
+        });
+        jPanel6.add(txtApellidosNEmpleados, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 180, -1));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel5.setText("Nombres:");
         jPanel6.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
-        jPanel6.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 180, -1));
+
+        txtNombresEmpleado.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNombresEmpleadoKeyTyped(evt);
+            }
+        });
+        jPanel6.add(txtNombresEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 180, -1));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel6.setText("Nacionalidad:");
         jPanel6.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 10, -1, -1));
-        jPanel6.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 30, 180, -1));
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel7.setText("Distrito:");
@@ -136,32 +147,71 @@ public class JInternalFrameTablaEmpleados extends javax.swing.JInternalFrame {
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel8.setText("Contraseña:");
         jPanel6.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 10, -1, -1));
-        jPanel6.add(jTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 30, 180, -1));
+
+        txtContraNEmpleado.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtContraNEmpleadoKeyTyped(evt);
+            }
+        });
+        jPanel6.add(txtContraNEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 30, 180, -1));
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel9.setText("Numero de Doc:");
         jPanel6.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 70, -1, -1));
-        jPanel6.add(jTextField8, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 90, 180, -1));
+
+        txtNumDocNEmpleado.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNumDocNEmpleadoKeyTyped(evt);
+            }
+        });
+        jPanel6.add(txtNumDocNEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 90, 180, -1));
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel10.setText("Teléfono:");
         jPanel6.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 130, -1, -1));
-        jPanel6.add(jTextField9, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 150, 180, -1));
+
+        txtTelefonoNEmpleado.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtTelefonoNEmpleadoKeyTyped(evt);
+            }
+        });
+        jPanel6.add(txtTelefonoNEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 150, 180, -1));
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel11.setText("Correo:");
         jPanel6.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 70, -1, -1));
-        jPanel6.add(jTextField10, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 90, 180, -1));
-        jPanel6.add(jTextField11, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 150, 180, -1));
+
+        txtCorreoNCEmpleado.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCorreoNCEmpleadoKeyTyped(evt);
+            }
+        });
+        jPanel6.add(txtCorreoNCEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 90, 180, -1));
+
+        cbxDireccionNEmpleado.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                cbxDireccionNEmpleadoKeyTyped(evt);
+            }
+        });
+        jPanel6.add(cbxDireccionNEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 150, 180, -1));
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel12.setText("Dirección:");
         jPanel6.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 130, -1, -1));
-        jPanel6.add(jTextField12, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 30, 180, -1));
+
+        txtNUsuarioEmpleado.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNUsuarioEmpleadoKeyTyped(evt);
+            }
+        });
+        jPanel6.add(txtNUsuarioEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 30, 180, -1));
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel13.setText("Usuario:");
         jPanel6.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 10, -1, -1));
+
+        cbxNacionaNEmpleado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "No Especificado", "Peruana", "Extranjera" }));
+        jPanel6.add(cbxNacionaNEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 30, 180, -1));
 
         jPanel1.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, 860, 180));
 
@@ -174,8 +224,142 @@ public class JInternalFrameTablaEmpleados extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void txtNombresEmpleadoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombresEmpleadoKeyTyped
+        String text= txtNombresEmpleado.getText();//texto actual
+        int lim=30;
+        if(text.length()>= lim) evt.consume();
+        
+        char c= evt.getKeyChar();//c= caracter actual
+        // Permite solo letras
+        if (!Character.isLetter(c) && c != ' ') {
+        evt.consume();
+        return;
+        }
+        // Permite máximo un espacio
+        if (c == ' ' && text.contains(" ")) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtNombresEmpleadoKeyTyped
+
+    private void txtApellidosNEmpleadosKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApellidosNEmpleadosKeyTyped
+        String text= txtApellidosNEmpleados.getText();//texto actual
+        int lim=30;
+        if(text.length()>= lim) evt.consume();
+        
+        char c= evt.getKeyChar();//c= caracter actual
+        // Permite solo letras
+        if (!Character.isLetter(c) && c != ' ') {
+        evt.consume();
+        return;
+        }
+        // Permite máximo un espacio
+        if (c == ' ' && text.contains(" ")) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtApellidosNEmpleadosKeyTyped
+
+    private void txtNUsuarioEmpleadoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNUsuarioEmpleadoKeyTyped
+              String text = txtNUsuarioEmpleado.getText(); // texto actual
+int lim = 30;
+if (text.length() >= lim) evt.consume();
+
+char c = evt.getKeyChar(); // carácter actual
+
+// Permite solo letras y máximo un espacio
+if (!Character.isLetter(c) && c != ' ') {
+    evt.consume();
+    return;
+}
+
+// Solo se permite un espacio en todo el texto
+if (c == ' ' && text.contains(" ")) {
+    evt.consume();
+}
+
+    }//GEN-LAST:event_txtNUsuarioEmpleadoKeyTyped
+
+    private void txtContraNEmpleadoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtContraNEmpleadoKeyTyped
+                String text = txtContraNEmpleado.getText();
+int lim = 24;
+if (text.length() >= lim) {
+    evt.consume();
+}
+
+char c = evt.getKeyChar();
+String allowedSymbols = "@_-!.#";
+
+// Permitir letras, números y algunos símbolos comunes
+if (!Character.isLetterOrDigit(c) && allowedSymbols.indexOf(c) == -1) {
+    evt.consume();
+}
+
+    }//GEN-LAST:event_txtContraNEmpleadoKeyTyped
+
+    private void txtTelefonoNEmpleadoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelefonoNEmpleadoKeyTyped
+                String text= txtTelefonoNEmpleado.getText();
+        int lim=9;
+        if(text.length() >=9) evt.consume();
+        char c=evt.getKeyChar(); //caracter actual
+        if(!(Character.isDigit(c))){evt.consume();}
+    }//GEN-LAST:event_txtTelefonoNEmpleadoKeyTyped
+
+    private void txtCorreoNCEmpleadoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCorreoNCEmpleadoKeyTyped
+        String text = txtCorreoNCEmpleado.getText(); // texto actual
+int lim = 40;
+if (text.length() >= lim) evt.consume();
+
+char c = evt.getKeyChar(); // carácter actual
+
+// Permitidos: letras, números y símbolos básicos de correo
+String permitidos = "@._-";
+if (!Character.isLetterOrDigit(c) && permitidos.indexOf(c) == -1) {
+    evt.consume();
+}
+    }//GEN-LAST:event_txtCorreoNCEmpleadoKeyTyped
+
+    private void cbxDireccionNEmpleadoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cbxDireccionNEmpleadoKeyTyped
+        String text = cbxDireccionNEmpleado.getText(); // texto actual
+int lim = 50;
+char c = evt.getKeyChar(); // carácter actual
+
+// Limitar longitud
+if (text.length() >= lim) {
+    evt.consume();
+    return;
+}
+
+// Permitir letras, números y un solo espacio entre palabras
+if (!Character.isLetterOrDigit(c) && c != ' ') {
+    evt.consume();
+    return;
+}
+
+// Evitar espacio inicial
+if (text.isEmpty() && c == ' ') {
+    evt.consume();
+    return;
+}
+
+// Evitar más de un espacio seguido
+if (c == ' ' && text.endsWith(" ")) {
+    evt.consume();
+}
+    }//GEN-LAST:event_cbxDireccionNEmpleadoKeyTyped
+
+    private void txtNumDocNEmpleadoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumDocNEmpleadoKeyTyped
+        String text = txtNumDocNEmpleado.getText();
+int lim = 12; // Ajusta el límite según el tipo de documento
+
+char c = evt.getKeyChar();
+if (text.length() >= lim || !Character.isDigit(c)) {
+    evt.consume();
+}
+    }//GEN-LAST:event_txtNumDocNEmpleadoKeyTyped
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField cbxDireccionNEmpleado;
+    private javax.swing.JComboBox<String> cbxNacionaNEmpleado;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
@@ -195,15 +379,13 @@ public class JInternalFrameTablaEmpleados extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableEmpleados;
-    private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextField11;
-    private javax.swing.JTextField jTextField12;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
+    private javax.swing.JTextField txtApellidosNEmpleados;
+    private javax.swing.JTextField txtContraNEmpleado;
+    private javax.swing.JTextField txtCorreoNCEmpleado;
+    private javax.swing.JTextField txtNUsuarioEmpleado;
+    private javax.swing.JTextField txtNombresEmpleado;
+    private javax.swing.JTextField txtNumDocNEmpleado;
+    private javax.swing.JTextField txtTelefonoNEmpleado;
     // End of variables declaration//GEN-END:variables
 }

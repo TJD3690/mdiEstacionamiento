@@ -128,22 +128,22 @@ public class JInternalFrameRegNuevoUsuario extends javax.swing.JInternalFrame {
         jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel11.setText("Direccion");
         jPanel1.add(jLabel11);
-        jLabel11.setBounds(20, 290, 56, 20);
+        jLabel11.setBounds(20, 290, 70, 20);
 
         jLabel12.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel12.setText("Sexo:");
         jPanel1.add(jLabel12);
-        jLabel12.setBounds(20, 320, 31, 20);
+        jLabel12.setBounds(20, 320, 60, 20);
 
         jLabel13.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel13.setText("Tipo de Documento:");
         jPanel1.add(jLabel13);
-        jLabel13.setBounds(20, 350, 124, 20);
+        jLabel13.setBounds(20, 350, 150, 20);
 
         jLabel14.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel14.setText("Numero de Documento:");
         jPanel1.add(jLabel14);
-        jLabel14.setBounds(20, 380, 148, 20);
+        jLabel14.setBounds(20, 380, 160, 20);
 
         txtNumDocNUsuario.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -206,12 +206,6 @@ public class JInternalFrameRegNuevoUsuario extends javax.swing.JInternalFrame {
         cbxTipDocNUsuario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "DNI", "carne de extranjeria", "pasaporte" }));
         jPanel1.add(cbxTipDocNUsuario);
         cbxTipDocNUsuario.setBounds(200, 350, 180, 22);
-
-        cbxDireccionNUsuario.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                cbxDireccionNUsuarioKeyTyped(evt);
-            }
-        });
         jPanel1.add(cbxDireccionNUsuario);
         cbxDireccionNUsuario.setBounds(200, 290, 180, 22);
 
@@ -393,35 +387,6 @@ if (text.length() >= lim || !Character.isDigit(c)) {
     evt.consume();
 }
     }//GEN-LAST:event_txtNumDocNUsuarioKeyTyped
-
-    private void cbxDireccionNUsuarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cbxDireccionNUsuarioKeyTyped
-String text = cbxDireccionNUsuario.getText(); // texto actual
-int lim = 50;
-char c = evt.getKeyChar(); // carácter actual
-
-// Limitar longitud
-if (text.length() >= lim) {
-    evt.consume();
-    return;
-}
-
-// Permitir letras, números y un solo espacio entre palabras
-if (!Character.isLetterOrDigit(c) && c != ' ') {
-    evt.consume();
-    return;
-}
-
-// Evitar espacio inicial
-if (text.isEmpty() && c == ' ') {
-    evt.consume();
-    return;
-}
-
-// Evitar más de un espacio seguido
-if (c == ' ' && text.endsWith(" ")) {
-    evt.consume();
-}
-    }//GEN-LAST:event_cbxDireccionNUsuarioKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
