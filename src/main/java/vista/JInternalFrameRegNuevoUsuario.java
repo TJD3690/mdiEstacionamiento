@@ -144,6 +144,12 @@ public class JInternalFrameRegNuevoUsuario extends javax.swing.JInternalFrame {
         jLabel14.setText("Numero de Documento:");
         jPanel1.add(jLabel14);
         jLabel14.setBounds(20, 380, 148, 20);
+
+        txtNumDocNUsuario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNumDocNUsuarioKeyTyped(evt);
+            }
+        });
         jPanel1.add(txtNumDocNUsuario);
         txtNumDocNUsuario.setBounds(200, 380, 180, 22);
 
@@ -163,6 +169,11 @@ public class JInternalFrameRegNuevoUsuario extends javax.swing.JInternalFrame {
         jPanel1.add(txtNUsuario);
         txtNUsuario.setBounds(200, 110, 180, 22);
 
+        txtContraNUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtContraNUsuarioActionPerformed(evt);
+            }
+        });
         txtContraNUsuario.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtContraNUsuarioKeyTyped(evt);
@@ -183,12 +194,24 @@ public class JInternalFrameRegNuevoUsuario extends javax.swing.JInternalFrame {
         });
         jPanel1.add(txtTelefonoNUsuario);
         txtTelefonoNUsuario.setBounds(200, 170, 180, 22);
+
+        txtCorreoNUsuario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCorreoNUsuarioKeyTyped(evt);
+            }
+        });
         jPanel1.add(txtCorreoNUsuario);
         txtCorreoNUsuario.setBounds(200, 200, 180, 22);
 
         cbxTipDocNUsuario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "DNI", "carne de extranjeria", "pasaporte" }));
         jPanel1.add(cbxTipDocNUsuario);
         cbxTipDocNUsuario.setBounds(200, 350, 180, 22);
+
+        cbxDireccionNUsuario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                cbxDireccionNUsuarioKeyTyped(evt);
+            }
+        });
         jPanel1.add(cbxDireccionNUsuario);
         cbxDireccionNUsuario.setBounds(200, 290, 180, 22);
 
@@ -252,13 +275,23 @@ public class JInternalFrameRegNuevoUsuario extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jRadioButton3ActionPerformed
 
     private void txtNUsuarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNUsuarioKeyTyped
-       String text= txtNUsuario.getText();//texto actual
-        int lim=30;
-        if(text.length()>= lim) evt.consume();
-        
-        char c= evt.getKeyChar();//c= caracter actual
-        // Permite solo letras
-        if (!Character.isLetter(c) && c != ' ') evt.consume();
+      String text = txtNUsuario.getText(); // texto actual
+int lim = 30;
+if (text.length() >= lim) evt.consume();
+
+char c = evt.getKeyChar(); // carácter actual
+
+// Permite solo letras y máximo un espacio
+if (!Character.isLetter(c) && c != ' ') {
+    evt.consume();
+    return;
+}
+
+// Solo se permite un espacio en todo el texto
+if (c == ' ' && text.contains(" ")) {
+    evt.consume();
+}
+
     }//GEN-LAST:event_txtNUsuarioKeyTyped
 
     private void cbxDistritoNUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxDistritoNUsuarioActionPerformed
@@ -305,9 +338,20 @@ public class JInternalFrameRegNuevoUsuario extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtApellidosNUsuarioKeyTyped
 
     private void txtContraNUsuarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtContraNUsuarioKeyTyped
-        String text= txtContraNUsuario.getText();//texto actual
-        int lim=24;
-        if(text.length()>= lim) evt.consume();
+        String text = txtContraNUsuario.getText();
+int lim = 24;
+if (text.length() >= lim) {
+    evt.consume();
+}
+
+char c = evt.getKeyChar();
+String allowedSymbols = "@_-!.#";
+
+// Permitir letras, números y algunos símbolos comunes
+if (!Character.isLetterOrDigit(c) && allowedSymbols.indexOf(c) == -1) {
+    evt.consume();
+}
+
     }//GEN-LAST:event_txtContraNUsuarioKeyTyped
 
     private void txtTelefonoNUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTelefonoNUsuarioActionPerformed
@@ -321,6 +365,63 @@ public class JInternalFrameRegNuevoUsuario extends javax.swing.JInternalFrame {
         char c=evt.getKeyChar(); //caracter actual
         if(!(Character.isDigit(c))){evt.consume();}
     }//GEN-LAST:event_txtTelefonoNUsuarioKeyTyped
+
+    private void txtContraNUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtContraNUsuarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtContraNUsuarioActionPerformed
+
+    private void txtCorreoNUsuarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCorreoNUsuarioKeyTyped
+String text = txtCorreoNUsuario.getText(); // texto actual
+int lim = 40;
+if (text.length() >= lim) evt.consume();
+
+char c = evt.getKeyChar(); // carácter actual
+
+// Permitidos: letras, números y símbolos básicos de correo
+String permitidos = "@._-";
+if (!Character.isLetterOrDigit(c) && permitidos.indexOf(c) == -1) {
+    evt.consume();
+}
+    }//GEN-LAST:event_txtCorreoNUsuarioKeyTyped
+
+    private void txtNumDocNUsuarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumDocNUsuarioKeyTyped
+String text = txtNumDocNUsuario.getText();
+int lim = 12; // Ajusta el límite según el tipo de documento
+
+char c = evt.getKeyChar();
+if (text.length() >= lim || !Character.isDigit(c)) {
+    evt.consume();
+}
+    }//GEN-LAST:event_txtNumDocNUsuarioKeyTyped
+
+    private void cbxDireccionNUsuarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cbxDireccionNUsuarioKeyTyped
+String text = cbxDireccionNUsuario.getText(); // texto actual
+int lim = 50;
+char c = evt.getKeyChar(); // carácter actual
+
+// Limitar longitud
+if (text.length() >= lim) {
+    evt.consume();
+    return;
+}
+
+// Permitir letras, números y un solo espacio entre palabras
+if (!Character.isLetterOrDigit(c) && c != ' ') {
+    evt.consume();
+    return;
+}
+
+// Evitar espacio inicial
+if (text.isEmpty() && c == ' ') {
+    evt.consume();
+    return;
+}
+
+// Evitar más de un espacio seguido
+if (c == ' ' && text.endsWith(" ")) {
+    evt.consume();
+}
+    }//GEN-LAST:event_cbxDireccionNUsuarioKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
