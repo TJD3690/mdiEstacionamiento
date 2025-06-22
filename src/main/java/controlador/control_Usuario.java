@@ -9,6 +9,7 @@ import javax.swing.JOptionPane;
 import Gestion.Empleado;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author LENOVO
@@ -64,5 +65,49 @@ public class control_Usuario {
         }
         return rpta;
     }
+    
+    //-------------Metodo guardado2-------------
+    public DefaultTableModel getTablaEmpleados() {
+    
+    String[] columnas = {
+        "ID","Nacionalidad","Sexo","Distrito",
+        "Nombres","Apellidos","Usuario","Password",
+        "NumDoc","Teléfono","Correo","Dirección"
+    };
+    DefaultTableModel modelo = new DefaultTableModel(columnas, 0);
+
+    
+    String sql = "SELECT IdEmpleado, CodNacio, CodSexo, CodDistrito, " +
+                 "Nombres, Apellidos, Usuario, Password, NumDoc, Telefono, Correo, Direccion " +
+                 "FROM dbo.Empleado";
+
+    try (Connection cn = Conexion.establecerConexion();
+         PreparedStatement ps = cn.prepareStatement(sql);
+         ResultSet rs = ps.executeQuery()) {
+
+
+        while (rs.next()) {
+            Object[] fila = new Object[12];
+            fila[0] = rs.getInt("IdEmpleado");
+            fila[1] = rs.getInt("CodNacio");
+            fila[2] = rs.getInt("CodSexo");
+            fila[3] = rs.getInt("CodDistrito");
+            fila[4] = rs.getString("Nombres");
+            fila[5] = rs.getString("Apellidos");
+            fila[6] = rs.getString("Usuario");
+            fila[7] = rs.getString("Password");
+            fila[8] = rs.getString("NumDoc");
+            fila[9] = rs.getInt("Telefono");
+            fila[10] = rs.getString("Correo");
+            fila[11] = rs.getString("Direccion");
+            modelo.addRow(fila);
+        }
+    } catch (SQLException ex) {
+        ex.printStackTrace();
+    }
+
+    return modelo;
+}
+
     
 }

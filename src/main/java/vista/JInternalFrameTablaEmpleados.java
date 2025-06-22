@@ -163,7 +163,7 @@ public class JInternalFrameTablaEmpleados extends javax.swing.JInternalFrame {
         jLabel13.setText("Usuario:");
         jPanel6.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 10, -1, -1));
 
-        jPanel1.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 330, 860, 180));
+        jPanel1.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, 860, 180));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 890, 520));
 

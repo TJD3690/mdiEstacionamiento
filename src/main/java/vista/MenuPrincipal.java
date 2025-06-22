@@ -68,6 +68,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jTablas.add(jTablaClientes);
 
         jTablaVehiculos.setText("Vehiculos");
+        jTablaVehiculos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTablaVehiculosActionPerformed(evt);
+            }
+        });
         jTablas.add(jTablaVehiculos);
 
         jMenuBar1.add(jTablas);
@@ -132,7 +137,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jTablaEmpleadosActionPerformed
 
     private void jRegistrarEntradaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRegistrarEntradaActionPerformed
-
         JInternalFrameRegEntrada interRegEntrada= new JInternalFrameRegEntrada();
         JDesktopPane_menu.add(interRegEntrada);
         interRegEntrada.setVisible(true);
@@ -156,6 +160,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
         JDesktopPane_menu.add(interRegSalida);
         interRegSalida.setVisible(true);
     }//GEN-LAST:event_jRegistrarSalidaActionPerformed
+
+    private void jTablaVehiculosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTablaVehiculosActionPerformed
+        JInternalFrameTablaVehiculos interVhc = new JInternalFrameTablaVehiculos();
+        JDesktopPane_menu.add(interVhc);
+        interVhc.setVisible(true);
+    }//GEN-LAST:event_jTablaVehiculosActionPerformed
 
     /**
      * @param args the command line arguments

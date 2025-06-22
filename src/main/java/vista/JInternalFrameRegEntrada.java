@@ -26,15 +26,254 @@ public class JInternalFrameRegEntrada extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        txtNumDocNUsuario = new javax.swing.JTextField();
+        txtApellidosNUsuario = new javax.swing.JTextField();
+        txtNUsuario = new javax.swing.JTextField();
+        txtContraNUsuario = new javax.swing.JTextField();
+        txtTelefonoNUsuario = new javax.swing.JTextField();
+        txtCorreoNUsuario = new javax.swing.JTextField();
+        cbxDireccionNUsuario = new javax.swing.JTextField();
+        txtNombresNUsuario = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+
         setClosable(true);
         setIconifiable(true);
         setResizable(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jPanel1.setLayout(null);
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel1.setText("Registrar Entrada");
+        jPanel1.add(jLabel1);
+        jLabel1.setBounds(100, 0, 210, 32);
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel2.setText("IdEntrada:");
+        jPanel1.add(jLabel2);
+        jLabel2.setBounds(20, 50, 70, 20);
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel3.setText("IdCliente:");
+        jPanel1.add(jLabel3);
+        jLabel3.setBounds(20, 80, 57, 20);
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel4.setText("Nro de Placa:");
+        jPanel1.add(jLabel4);
+        jLabel4.setBounds(20, 140, 80, 20);
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel5.setText("Nivel:");
+        jPanel1.add(jLabel5);
+        jLabel5.setBounds(20, 170, 33, 20);
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel6.setText("Zona:");
+        jPanel1.add(jLabel6);
+        jLabel6.setBounds(20, 200, 34, 20);
+
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel7.setText("Fecha:");
+        jPanel1.add(jLabel7);
+        jLabel7.setBounds(20, 230, 38, 20);
+
+        jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel11.setText("Hora:");
+        jPanel1.add(jLabel11);
+        jLabel11.setBounds(20, 260, 56, 20);
+
+        jLabel14.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel14.setText("Numero de Documento:");
+        jPanel1.add(jLabel14);
+        jLabel14.setBounds(20, 110, 148, 20);
+        jPanel1.add(txtNumDocNUsuario);
+        txtNumDocNUsuario.setBounds(200, 110, 180, 22);
+
+        txtApellidosNUsuario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtApellidosNUsuarioKeyTyped(evt);
+            }
+        });
+        jPanel1.add(txtApellidosNUsuario);
+        txtApellidosNUsuario.setBounds(200, 80, 180, 22);
+
+        txtNUsuario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNUsuarioKeyTyped(evt);
+            }
+        });
+        jPanel1.add(txtNUsuario);
+        txtNUsuario.setBounds(200, 140, 180, 22);
+
+        txtContraNUsuario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtContraNUsuarioKeyTyped(evt);
+            }
+        });
+        jPanel1.add(txtContraNUsuario);
+        txtContraNUsuario.setBounds(200, 170, 180, 22);
+
+        txtTelefonoNUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTelefonoNUsuarioActionPerformed(evt);
+            }
+        });
+        txtTelefonoNUsuario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtTelefonoNUsuarioKeyTyped(evt);
+            }
+        });
+        jPanel1.add(txtTelefonoNUsuario);
+        txtTelefonoNUsuario.setBounds(200, 200, 180, 22);
+        jPanel1.add(txtCorreoNUsuario);
+        txtCorreoNUsuario.setBounds(200, 230, 180, 22);
+        jPanel1.add(cbxDireccionNUsuario);
+        cbxDireccionNUsuario.setBounds(200, 260, 180, 22);
+
+        txtNombresNUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNombresNUsuarioActionPerformed(evt);
+            }
+        });
+        txtNombresNUsuario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNombresNUsuarioKeyTyped(evt);
+            }
+        });
+        jPanel1.add(txtNombresNUsuario);
+        txtNombresNUsuario.setBounds(200, 50, 180, 22);
+
+        jButton1.setText("REGISTRAR");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton1);
+        jButton1.setBounds(220, 330, 110, 23);
+
+        jButton2.setText("REGISTRAR");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton2);
+        jButton2.setBounds(80, 330, 110, 23);
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 390, 430));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void txtApellidosNUsuarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApellidosNUsuarioKeyTyped
+        String text= txtApellidosNUsuario.getText();//texto actual
+        int lim=30;
+        if(text.length()>= lim) evt.consume();
+
+        char c= evt.getKeyChar();//c= caracter actual
+        // Permite solo letras
+        if (!Character.isLetter(c) && c != ' ') {
+            evt.consume();
+            return;
+        }
+        // Permite máximo un espacio
+        if (c == ' ' && text.contains(" ")) {
+            evt.consume();
+        }
+
+    }//GEN-LAST:event_txtApellidosNUsuarioKeyTyped
+
+    private void txtNUsuarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNUsuarioKeyTyped
+        String text= txtNUsuario.getText();//texto actual
+        int lim=30;
+        if(text.length()>= lim) evt.consume();
+
+        char c= evt.getKeyChar();//c= caracter actual
+        // Permite solo letras
+        if (!Character.isLetter(c) && c != ' ') evt.consume();
+    }//GEN-LAST:event_txtNUsuarioKeyTyped
+
+    private void txtContraNUsuarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtContraNUsuarioKeyTyped
+        String text= txtContraNUsuario.getText();//texto actual
+        int lim=24;
+        if(text.length()>= lim) evt.consume();
+    }//GEN-LAST:event_txtContraNUsuarioKeyTyped
+
+    private void txtTelefonoNUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTelefonoNUsuarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTelefonoNUsuarioActionPerformed
+
+    private void txtTelefonoNUsuarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelefonoNUsuarioKeyTyped
+        String text= txtTelefonoNUsuario.getText();
+        int lim=9;
+        if(text.length() >=9) evt.consume();
+        char c=evt.getKeyChar(); //caracter actual
+        if(!(Character.isDigit(c))){evt.consume();}
+    }//GEN-LAST:event_txtTelefonoNUsuarioKeyTyped
+
+    private void txtNombresNUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombresNUsuarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNombresNUsuarioActionPerformed
+
+    private void txtNombresNUsuarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombresNUsuarioKeyTyped
+        String text= txtNombresNUsuario.getText();//texto actual
+        int lim=30;
+        if(text.length()>= lim) evt.consume();
+
+        char c= evt.getKeyChar();//c= caracter actual
+        // Permite solo letras
+        if (!Character.isLetter(c) && c != ' ') {
+            evt.consume();
+            return;
+        }
+        // Permite máximo un espacio
+        if (c == ' ' && text.contains(" ")) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtNombresNUsuarioKeyTyped
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField cbxDireccionNUsuario;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JTextField txtApellidosNUsuario;
+    private javax.swing.JTextField txtContraNUsuario;
+    private javax.swing.JTextField txtCorreoNUsuario;
+    private javax.swing.JTextField txtNUsuario;
+    private javax.swing.JTextField txtNombresNUsuario;
+    private javax.swing.JTextField txtNumDocNUsuario;
+    private javax.swing.JTextField txtTelefonoNUsuario;
     // End of variables declaration//GEN-END:variables
 }
