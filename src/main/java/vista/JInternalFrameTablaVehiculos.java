@@ -41,15 +41,15 @@ public class JInternalFrameTablaVehiculos extends javax.swing.JInternalFrame {
         jLabel4 = new javax.swing.JLabel();
         jTextField3 = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        NumPlaca = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jTextField6 = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        jTextField7 = new javax.swing.JTextField();
-        jTextField12 = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
+        cbxColor = new javax.swing.JComboBox<>();
+        TipoVehiculo = new javax.swing.JComboBox<>();
+        LunasPolarizadasL = new javax.swing.JComboBox<>();
 
         setClosable(true);
         setIconifiable(true);
@@ -118,27 +118,39 @@ public class JInternalFrameTablaVehiculos extends javax.swing.JInternalFrame {
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel5.setText("Nr de Placa:");
         jPanel6.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
-        jPanel6.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 180, -1));
+
+        NumPlaca.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                NumPlacaKeyTyped(evt);
+            }
+        });
+        jPanel6.add(NumPlaca, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 180, -1));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel6.setText("Color:");
         jPanel6.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 10, -1, -1));
-        jPanel6.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 30, 180, -1));
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel7.setText("Tipo de Vehiculo:");
         jPanel6.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 60, -1, -1));
-        jPanel6.add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 80, 180, -1));
+        jPanel6.add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 30, 180, -1));
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel8.setText("Tiene Lunas Polarizadas:");
         jPanel6.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 10, -1, -1));
-        jPanel6.add(jTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 30, 180, -1));
-        jPanel6.add(jTextField12, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 30, 180, -1));
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel13.setText("Marca:");
-        jPanel6.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 10, -1, -1));
+        jPanel6.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 10, -1, -1));
+
+        cbxColor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "No Especificado", "Negro", "Gris", "Plata", "Azul", "Verde", "Rojo", "Amarillo", "Blanco", "Marrón", "Beige", "Celeste", "Turquesa", "Dorado", "Bronce", "Vino", "Anaranjado", "Lavanda", "Fucsia", "Lila", "Cian", "Magenta", "Púrpura", "Gris Oscuro", "Azul Marino", "Verde Oliva", "Negro Mate", "Blanco Perla" }));
+        jPanel6.add(cbxColor, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 30, 180, -1));
+
+        TipoVehiculo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "No Especificado", "Sedan", "SUV", "Pickup", "Hatchback", "Convertible", "Coupé", "Furgoneta", "Camión", "Motocicleta", "Minivan" }));
+        jPanel6.add(TipoVehiculo, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 80, 180, -1));
+
+        LunasPolarizadasL.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Si", "No" }));
+        jPanel6.add(LunasPolarizadasL, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 30, 180, -1));
 
         jPanel1.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 370, 860, 120));
 
@@ -151,8 +163,26 @@ public class JInternalFrameTablaVehiculos extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void NumPlacaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NumPlacaKeyTyped
+String text = NumPlaca.getText(); // texto actual 
+    int lim = 10; // longitud máxima sugerida para placas
+    if (text.length() >= lim) evt.consume();
+
+    char c = evt.getKeyChar();
+
+    // Permitir letras, dígitos y guiones
+    if (!Character.isLetterOrDigit(c) && c != '-') {
+        evt.consume();
+    }
+
+    }//GEN-LAST:event_NumPlacaKeyTyped
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> LunasPolarizadasL;
+    private javax.swing.JTextField NumPlaca;
+    private javax.swing.JComboBox<String> TipoVehiculo;
+    private javax.swing.JComboBox<String> cbxColor;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
@@ -168,11 +198,7 @@ public class JInternalFrameTablaVehiculos extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableEmpleados;
-    private javax.swing.JTextField jTextField12;
     private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
     // End of variables declaration//GEN-END:variables
 }

@@ -348,12 +348,12 @@ if (c == ' ' && text.endsWith(" ")) {
 
     private void txtNumDocNEmpleadoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumDocNEmpleadoKeyTyped
         String text = txtNumDocNEmpleado.getText();
-int lim = 12; // Ajusta el límite según el tipo de documento
+        int lim = 12; // Ajusta el límite según el tipo de documento
 
-char c = evt.getKeyChar();
-if (text.length() >= lim || !Character.isDigit(c)) {
-    evt.consume();
-}
+        char c = evt.getKeyChar();
+        if (text.length() >= lim || !Character.isDigit(c)) {
+            evt.consume();
+        }
     }//GEN-LAST:event_txtNumDocNEmpleadoKeyTyped
 
 
