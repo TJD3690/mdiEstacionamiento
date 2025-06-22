@@ -15,7 +15,7 @@ public class Conexion {
     static String puerto="1433";
     
     String cadena = "jdbc:sqlserver://"+ip+":"+puerto+"/"+baseDatos;
-     
+    //sera
     public static Connection establecerConexion() {
     try {
         String cadena = "jdbc:sqlserver://localhost:1433;databaseName=" + baseDatos + ";encrypt=true;trustServerCertificate=true";
