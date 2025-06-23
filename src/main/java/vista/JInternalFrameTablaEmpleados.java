@@ -140,6 +140,11 @@ public class JInternalFrameTablaEmpleados extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTableEmpleados.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTableEmpleadosKeyTyped(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTableEmpleados);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -429,6 +434,10 @@ if (c == ' ' && text.endsWith(" ")) {
     private void txtNombresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombresActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNombresActionPerformed
+
+    private void jTableEmpleadosKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTableEmpleadosKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTableEmpleadosKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

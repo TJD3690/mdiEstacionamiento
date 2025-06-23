@@ -10,6 +10,8 @@ import javax.swing.JTextField;
 import java.sql.*;
 import java.util.Vector;
 import conexion.Conexion;
+import javax.swing.table.DefaultTableModel;
+
 
 
 
@@ -26,6 +28,7 @@ public class JInternalFrameTablaClientes extends javax.swing.JInternalFrame {
         //this.setExtendedState(this.MAXIMIZED_BOTH);
         this.setTitle("Clientes");
         cargarDistritosAutoCompletar(DistritoCLiente);
+        this.CargarTablaClientes();
     }
     private void cargarDistritosAutoCompletar(JComboBox comboBox) {
     try {
@@ -96,217 +99,222 @@ public class JInternalFrameTablaClientes extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTableEmpleados = new javax.swing.JTable();
-        jPanel4 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jPanel6 = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
-        txtApellidosNClientes = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        txtNombresCliente = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        txtContraNCliente = new javax.swing.JTextField();
-        jLabel9 = new javax.swing.JLabel();
-        txtNumDocNCliente = new javax.swing.JTextField();
-        jLabel10 = new javax.swing.JLabel();
-        txtTelefonoNCliente = new javax.swing.JTextField();
-        jLabel11 = new javax.swing.JLabel();
-        txtCorreoNCliente = new javax.swing.JTextField();
-        cbxDireccionNCliente = new javax.swing.JTextField();
-        jLabel12 = new javax.swing.JLabel();
-        txtNUsuarioCliente = new javax.swing.JTextField();
-        jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
-        NumLicencia = new javax.swing.JTextField();
-        DistritoCLiente = new javax.swing.JComboBox<>();
-        cbxNacionaNCliente1 = new javax.swing.JComboBox<>();
+        jTableEmpleados = new javax.swing.JTable(){
+            @Override
+            public boolean isCellEditable(int row,int col){
+                return false;//nunca editable
+            }}
+            ;
+            jPanel4 = new javax.swing.JPanel();
+            jButton1 = new javax.swing.JButton();
+            jButton2 = new javax.swing.JButton();
+            jPanel6 = new javax.swing.JPanel();
+            jLabel4 = new javax.swing.JLabel();
+            txtApellidosNClientes = new javax.swing.JTextField();
+            jLabel5 = new javax.swing.JLabel();
+            txtNombresCliente = new javax.swing.JTextField();
+            jLabel6 = new javax.swing.JLabel();
+            jLabel7 = new javax.swing.JLabel();
+            jLabel8 = new javax.swing.JLabel();
+            txtContraNCliente = new javax.swing.JTextField();
+            jLabel9 = new javax.swing.JLabel();
+            txtNumDocNCliente = new javax.swing.JTextField();
+            jLabel10 = new javax.swing.JLabel();
+            txtTelefonoNCliente = new javax.swing.JTextField();
+            jLabel11 = new javax.swing.JLabel();
+            txtCorreoNCliente = new javax.swing.JTextField();
+            cbxDireccionNCliente = new javax.swing.JTextField();
+            jLabel12 = new javax.swing.JLabel();
+            txtNUsuarioCliente = new javax.swing.JTextField();
+            jLabel13 = new javax.swing.JLabel();
+            jLabel14 = new javax.swing.JLabel();
+            NumLicencia = new javax.swing.JTextField();
+            DistritoCLiente = new javax.swing.JComboBox<>();
+            cbxNacionaNCliente1 = new javax.swing.JComboBox<>();
 
-        setClosable(true);
-        setIconifiable(true);
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+            setClosable(true);
+            setIconifiable(true);
+            getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+            jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel1.setText("Administrar Clientes");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 10, -1, -1));
+            jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+            jLabel1.setText("Administrar Clientes");
+            jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 10, -1, -1));
 
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+            jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
-        jTableEmpleados.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(jTableEmpleados);
+            jTableEmpleados.setModel(new javax.swing.table.DefaultTableModel(
+                new Object [][] {
+                    {null, null, null, null},
+                    {null, null, null, null},
+                    {null, null, null, null},
+                    {null, null, null, null}
+                },
+                new String [] {
+                    "Title 1", "Title 2", "Title 3", "Title 4"
+                }
+            ));
+            jScrollPane1.setViewportView(jTableEmpleados);
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 710, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
-        );
+            javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+            jPanel2.setLayout(jPanel2Layout);
+            jPanel2Layout.setHorizontalGroup(
+                jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 710, Short.MAX_VALUE)
+            );
+            jPanel2Layout.setVerticalGroup(
+                jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+            );
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 710, 250));
+            jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 710, 250));
 
-        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+            jPanel4.setBackground(new java.awt.Color(255, 255, 255));
+            jPanel4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+            jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton1.setText("ACTUALIZAR");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        jPanel4.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
+            jButton1.setText("ACTUALIZAR");
+            jButton1.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    jButton1ActionPerformed(evt);
+                }
+            });
+            jPanel4.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
 
-        jButton2.setText("ELIMINAR");
-        jPanel4.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 100, -1));
+            jButton2.setText("ELIMINAR");
+            jPanel4.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 100, -1));
 
-        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 60, 140, 90));
+            jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 60, 140, 90));
 
-        jPanel6.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel6.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+            jPanel6.setBackground(new java.awt.Color(255, 255, 255));
+            jPanel6.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+            jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel4.setText("Apellidos:");
-        jPanel6.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, -1, -1));
+            jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+            jLabel4.setText("Apellidos:");
+            jPanel6.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, -1, -1));
 
-        txtApellidosNClientes.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtApellidosNClientesKeyTyped(evt);
-            }
-        });
-        jPanel6.add(txtApellidosNClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 180, -1));
+            txtApellidosNClientes.addKeyListener(new java.awt.event.KeyAdapter() {
+                public void keyTyped(java.awt.event.KeyEvent evt) {
+                    txtApellidosNClientesKeyTyped(evt);
+                }
+            });
+            jPanel6.add(txtApellidosNClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 180, -1));
 
-        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel5.setText("Nombres:");
-        jPanel6.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+            jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+            jLabel5.setText("Nombres:");
+            jPanel6.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
-        txtNombresCliente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNombresClienteActionPerformed(evt);
-            }
-        });
-        txtNombresCliente.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtNombresClienteKeyTyped(evt);
-            }
-        });
-        jPanel6.add(txtNombresCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 180, -1));
+            txtNombresCliente.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    txtNombresClienteActionPerformed(evt);
+                }
+            });
+            txtNombresCliente.addKeyListener(new java.awt.event.KeyAdapter() {
+                public void keyTyped(java.awt.event.KeyEvent evt) {
+                    txtNombresClienteKeyTyped(evt);
+                }
+            });
+            jPanel6.add(txtNombresCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 180, -1));
 
-        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel6.setText("Nacionalidad:");
-        jPanel6.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 10, -1, -1));
+            jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+            jLabel6.setText("Nacionalidad:");
+            jPanel6.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 10, -1, -1));
 
-        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel7.setText("Distrito:");
-        jPanel6.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 70, -1, -1));
+            jLabel7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+            jLabel7.setText("Distrito:");
+            jPanel6.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 70, -1, -1));
 
-        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel8.setText("Contraseña:");
-        jPanel6.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 10, -1, -1));
+            jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+            jLabel8.setText("Contraseña:");
+            jPanel6.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 10, -1, -1));
 
-        txtContraNCliente.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtContraNClienteKeyTyped(evt);
-            }
-        });
-        jPanel6.add(txtContraNCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 30, 180, -1));
+            txtContraNCliente.addKeyListener(new java.awt.event.KeyAdapter() {
+                public void keyTyped(java.awt.event.KeyEvent evt) {
+                    txtContraNClienteKeyTyped(evt);
+                }
+            });
+            jPanel6.add(txtContraNCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 30, 180, -1));
 
-        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel9.setText("Numero de Doc:");
-        jPanel6.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 70, -1, -1));
+            jLabel9.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+            jLabel9.setText("Numero de Doc:");
+            jPanel6.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 70, -1, -1));
 
-        txtNumDocNCliente.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtNumDocNClienteKeyTyped(evt);
-            }
-        });
-        jPanel6.add(txtNumDocNCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 90, 180, -1));
+            txtNumDocNCliente.addKeyListener(new java.awt.event.KeyAdapter() {
+                public void keyTyped(java.awt.event.KeyEvent evt) {
+                    txtNumDocNClienteKeyTyped(evt);
+                }
+            });
+            jPanel6.add(txtNumDocNCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 90, 180, -1));
 
-        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel10.setText("Teléfono:");
-        jPanel6.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 130, -1, -1));
+            jLabel10.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+            jLabel10.setText("Teléfono:");
+            jPanel6.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 130, -1, -1));
 
-        txtTelefonoNCliente.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtTelefonoNClienteKeyTyped(evt);
-            }
-        });
-        jPanel6.add(txtTelefonoNCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 150, 180, -1));
+            txtTelefonoNCliente.addKeyListener(new java.awt.event.KeyAdapter() {
+                public void keyTyped(java.awt.event.KeyEvent evt) {
+                    txtTelefonoNClienteKeyTyped(evt);
+                }
+            });
+            jPanel6.add(txtTelefonoNCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 150, 180, -1));
 
-        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel11.setText("Correo:");
-        jPanel6.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 70, -1, -1));
+            jLabel11.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+            jLabel11.setText("Correo:");
+            jPanel6.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 70, -1, -1));
 
-        txtCorreoNCliente.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtCorreoNClienteKeyTyped(evt);
-            }
-        });
-        jPanel6.add(txtCorreoNCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 90, 180, -1));
+            txtCorreoNCliente.addKeyListener(new java.awt.event.KeyAdapter() {
+                public void keyTyped(java.awt.event.KeyEvent evt) {
+                    txtCorreoNClienteKeyTyped(evt);
+                }
+            });
+            jPanel6.add(txtCorreoNCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 90, 180, -1));
 
-        cbxDireccionNCliente.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                cbxDireccionNClienteKeyTyped(evt);
-            }
-        });
-        jPanel6.add(cbxDireccionNCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 180, -1));
+            cbxDireccionNCliente.addKeyListener(new java.awt.event.KeyAdapter() {
+                public void keyTyped(java.awt.event.KeyEvent evt) {
+                    cbxDireccionNClienteKeyTyped(evt);
+                }
+            });
+            jPanel6.add(cbxDireccionNCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 180, -1));
 
-        jLabel12.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel12.setText("Dirección:");
-        jPanel6.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, -1, -1));
+            jLabel12.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+            jLabel12.setText("Dirección:");
+            jPanel6.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, -1, -1));
 
-        txtNUsuarioCliente.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtNUsuarioClienteKeyTyped(evt);
-            }
-        });
-        jPanel6.add(txtNUsuarioCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 30, 180, -1));
+            txtNUsuarioCliente.addKeyListener(new java.awt.event.KeyAdapter() {
+                public void keyTyped(java.awt.event.KeyEvent evt) {
+                    txtNUsuarioClienteKeyTyped(evt);
+                }
+            });
+            jPanel6.add(txtNUsuarioCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 30, 180, -1));
 
-        jLabel13.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel13.setText("Usuario:");
-        jPanel6.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 10, -1, -1));
+            jLabel13.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+            jLabel13.setText("Usuario:");
+            jPanel6.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 10, -1, -1));
 
-        jLabel14.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel14.setText("Numero de licencia:");
-        jPanel6.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 130, -1, -1));
+            jLabel14.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+            jLabel14.setText("Numero de licencia:");
+            jPanel6.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 130, -1, -1));
 
-        NumLicencia.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                NumLicenciaKeyTyped(evt);
-            }
-        });
-        jPanel6.add(NumLicencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 150, 180, -1));
+            NumLicencia.addKeyListener(new java.awt.event.KeyAdapter() {
+                public void keyTyped(java.awt.event.KeyEvent evt) {
+                    NumLicenciaKeyTyped(evt);
+                }
+            });
+            jPanel6.add(NumLicencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 150, 180, -1));
 
-        DistritoCLiente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "No Especificado", "Peruana", "Extranjera" }));
-        jPanel6.add(DistritoCLiente, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 90, 180, -1));
+            DistritoCLiente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "No Especificado", "Peruana", "Extranjera" }));
+            jPanel6.add(DistritoCLiente, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 90, 180, -1));
 
-        cbxNacionaNCliente1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "No Especificado", "Peruana", "Extranjera" }));
-        jPanel6.add(cbxNacionaNCliente1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 30, 180, -1));
+            cbxNacionaNCliente1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "No Especificado", "Peruana", "Extranjera" }));
+            jPanel6.add(cbxNacionaNCliente1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 30, 180, -1));
 
-        jPanel1.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 330, 860, 180));
+            jPanel1.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 330, 860, 180));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 890, 520));
+            getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 890, 520));
 
-        pack();
-    }// </editor-fold>//GEN-END:initComponents
+            pack();
+        }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
@@ -486,8 +494,8 @@ if (!Character.isLetterOrDigit(c)) {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTableEmpleados;
+    public static javax.swing.JScrollPane jScrollPane1;
+    public static volatile javax.swing.JTable jTableEmpleados;
     private javax.swing.JTextField txtApellidosNClientes;
     private javax.swing.JTextField txtContraNCliente;
     private javax.swing.JTextField txtCorreoNCliente;
@@ -496,4 +504,90 @@ if (!Character.isLetterOrDigit(c)) {
     private javax.swing.JTextField txtNumDocNCliente;
     private javax.swing.JTextField txtTelefonoNCliente;
     // End of variables declaration//GEN-END:variables
+    private void CargarTablaClientes() {
+    DefaultTableModel model = new DefaultTableModel();
+   model.addColumn("IdCliente");
+    model.addColumn("Nacionalidad");
+    model.addColumn("Sexo");
+    model.addColumn("Distrito");
+    model.addColumn("Nombres");
+    model.addColumn("Apellidos");
+    model.addColumn("NumDoc");
+    model.addColumn("NroLicencia");
+    model.addColumn("Telefono");
+    model.addColumn("Correo");
+    model.addColumn("Direccion");
+    model.addColumn("Usuario");
+
+
+    String sql = "SELECT C.IdCliente, N.Nombre AS Nacionalidad, S.Nombre AS Sexo, " +
+        "       D.Nombre AS Distrito, C.Nombres, C.Apellidos, C.NumDoc, " +
+        "       C.NroLicencia, C.Telefono, C.Correo, C.Direccion, C.Usuario " +
+        "FROM Cliente C " +
+        "  JOIN Nacionalidad N ON C.CodNacio   = N.CodNacio " +
+        "  JOIN Sexo        S ON C.CodSexo    = S.CodSexo " +
+        "  JOIN Distrito    D ON C.CodDistrito= D.CodDistrito";
+
+    try (Connection cn = Conexion.establecerConexion();
+         Statement st = cn.createStatement();
+         ResultSet rs = st.executeQuery(sql)) {
+
+        while (rs.next()) {
+            Object[] fila = new Object[12];
+            for (int i = 0; i < fila.length; i++) {
+                fila[i] = rs.getObject(i + 1);
+            }
+            model.addRow(fila);
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+
+    jTableEmpleados.setModel(model);  // este es el JTable de clientes
+
+    jTableEmpleados.getSelectionModel().addListSelectionListener(e -> {
+        if (!e.getValueIsAdjusting() && jTableEmpleados.getSelectedRow() != -1) {
+            int row = jTableEmpleados.getSelectedRow();
+            int id = Integer.parseInt(jTableEmpleados.getValueAt(row, 0).toString());
+            EnviarDatosClienteSeleccionado(id);
+        }
+    });
+}
+    
+    
+    
+private void EnviarDatosClienteSeleccionado(int idCliente) {
+    String sql = "SELECT C.Nombres, C.Apellidos, N.Nombre AS Nacionalidad, " +
+                 "       D.Nombre AS Distrito, C.NumDoc, C.NroLicencia, " +
+                 "       C.Telefono, C.Correo, C.Direccion, C.Usuario " +
+                 "FROM Cliente C " +
+                 "  JOIN Nacionalidad N ON C.CodNacio   = N.CodNacio " +
+                 "  JOIN Distrito    D ON C.CodDistrito = D.CodDistrito " +
+                 "WHERE C.IdCliente = ?";
+
+    try (Connection cn = Conexion.establecerConexion();
+         PreparedStatement pst = cn.prepareStatement(sql)) {
+
+        pst.setInt(1, idCliente);
+        try (ResultSet rs = pst.executeQuery()) {
+            if (rs.next()) {
+                txtNombresCliente.setText(rs.getString("Nombres"));
+                txtApellidosNClientes.setText(rs.getString("Apellidos"));
+                cbxNacionaNCliente1.setSelectedItem(rs.getString("Nacionalidad"));
+                DistritoCLiente.setSelectedItem(rs.getString("Distrito"));
+                txtNumDocNCliente.setText(rs.getString("NumDoc"));
+                NumLicencia.setText(rs.getString("NroLicencia"));
+                txtTelefonoNCliente.setText(rs.getString("Telefono"));
+                txtCorreoNCliente.setText(rs.getString("Correo"));
+                cbxDireccionNCliente.setText(rs.getString("Direccion"));
+                txtNUsuarioCliente.setText(rs.getString("Usuario"));
+            }
+        }
+
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+}
+
+
 }
