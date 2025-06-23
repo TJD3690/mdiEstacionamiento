@@ -8,6 +8,11 @@ import Gestion.Empleado;
 import controlador.*;
 import java.awt.Dimension;
 import javax.swing.JOptionPane;
+import javax.swing.*;
+import javax.swing.JTextField;
+import java.sql.*;
+import java.util.Vector;
+import conexion.Conexion;
 
 /**
  *
@@ -20,8 +25,54 @@ public class JInternalFrameRegNuevoUsuario extends javax.swing.JInternalFrame {
         initComponents();
         this.setSize(new Dimension(420, 486));
         this.setTitle("Registrar Nuevo Usuario");
+        cargarDistritosAutoCompletar(DistritoUsuario);
+
         
     }
+    private void cargarDistritosAutoCompletar(JComboBox comboBox) {
+    try {
+        Connection con = Conexion.establecerConexion();
+        String sql = "SELECT Nombre FROM Distrito ORDER BY Nombre";
+        PreparedStatement ps = con.prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
+
+        final Vector<String> distritos = new Vector<>();
+        while (rs.next()) {
+            distritos.add(rs.getString("Nombre"));
+        }
+
+        comboBox.setEditable(true);
+        comboBox.setModel(new DefaultComboBoxModel(distritos));
+        comboBox.setSelectedItem(null); // inicia en blanco
+
+        JTextField editor = (JTextField) comboBox.getEditor().getEditorComponent();
+
+        editor.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                String texto = editor.getText();
+
+                Vector<String> coincidencias = new Vector<>();
+                for (String item : distritos) {
+                    if (item.toLowerCase().startsWith(texto.toLowerCase())) {
+                        coincidencias.add(item);
+                    }
+                }
+
+                if (!coincidencias.isEmpty()) {
+                    comboBox.setModel(new DefaultComboBoxModel(coincidencias));
+                    comboBox.setSelectedItem(texto);
+                    comboBox.showPopup();
+                } else {
+                    comboBox.hidePopup();
+                }
+            }
+        });
+
+        con.close();
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(null, "Error al cargar distritos: " + e.getMessage());
+    }
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -64,11 +115,11 @@ public class JInternalFrameRegNuevoUsuario extends javax.swing.JInternalFrame {
         cbxDireccionNUsuario = new javax.swing.JTextField();
         jRadioButton2 = new javax.swing.JRadioButton();
         jRadioButton3 = new javax.swing.JRadioButton();
-        cbxDistritoNUsuario = new javax.swing.JComboBox<>();
         txtNombresNUsuario = new javax.swing.JTextField();
         cbxNacionaNUsuario = new javax.swing.JComboBox<>();
         btnLimpiar = new javax.swing.JButton();
         btnGuardar = new javax.swing.JButton();
+        DistritoUsuario = new javax.swing.JComboBox<>();
 
         jTextField3.setText("jTextField3");
 
@@ -237,15 +288,6 @@ public class JInternalFrameRegNuevoUsuario extends javax.swing.JInternalFrame {
         jPanel1.add(jRadioButton3);
         jRadioButton3.setBounds(300, 320, 70, 21);
 
-        cbxDistritoNUsuario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "No Especificado", "Lima                                                                                                                                          1", "Peruana", "Extranjera" }));
-        cbxDistritoNUsuario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbxDistritoNUsuarioActionPerformed(evt);
-            }
-        });
-        jPanel1.add(cbxDistritoNUsuario);
-        cbxDistritoNUsuario.setBounds(200, 260, 180, 22);
-
         txtNombresNUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNombresNUsuarioActionPerformed(evt);
@@ -275,6 +317,10 @@ public class JInternalFrameRegNuevoUsuario extends javax.swing.JInternalFrame {
         });
         jPanel1.add(btnGuardar);
         btnGuardar.setBounds(70, 420, 84, 23);
+
+        DistritoUsuario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jPanel1.add(DistritoUsuario);
+        DistritoUsuario.setBounds(200, 260, 180, 22);
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 410, 460));
 
@@ -308,10 +354,6 @@ if (c == ' ' && text.contains(" ")) {
 }
 
     }//GEN-LAST:event_txtNUsuarioKeyTyped
-
-    private void cbxDistritoNUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxDistritoNUsuarioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbxDistritoNUsuarioActionPerformed
 
     private void txtNombresNUsuarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombresNUsuarioKeyTyped
         String text= txtNombresNUsuario.getText();//texto actual
@@ -441,12 +483,12 @@ if (text.length() >= lim || !Character.isDigit(c)) {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> DistritoUsuario;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnLimpiar;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup4;
     private javax.swing.JTextField cbxDireccionNUsuario;
-    private javax.swing.JComboBox<String> cbxDistritoNUsuario;
     private javax.swing.JComboBox<String> cbxNacionaNUsuario;
     private javax.swing.JComboBox<String> cbxTipDocNUsuario;
     private javax.swing.JButton jButton1;

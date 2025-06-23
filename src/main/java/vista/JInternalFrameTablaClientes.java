@@ -34,7 +34,7 @@ public class JInternalFrameTablaClientes extends javax.swing.JInternalFrame {
         PreparedStatement ps = con.prepareStatement(sql);
         ResultSet rs = ps.executeQuery();
 
-        // Lista original de distritos
+        // Guardamos todos los nombres
         Vector<String> distritos = new Vector<>();
         while (rs.next()) {
             distritos.add(rs.getString("Nombre"));
@@ -42,6 +42,8 @@ public class JInternalFrameTablaClientes extends javax.swing.JInternalFrame {
 
         comboBox.setEditable(true);
         comboBox.setModel(new DefaultComboBoxModel(distritos));
+        comboBox.setSelectedItem(null); // 👈 Aquí está el cambio que evita mostrar "Abancay" u otro por defecto
+
         JTextField editor = (JTextField) comboBox.getEditor().getEditorComponent();
 
         editor.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -49,11 +51,12 @@ public class JInternalFrameTablaClientes extends javax.swing.JInternalFrame {
                 String texto = editor.getText();
 
                 if (texto.length() == 0) {
+                    comboBox.setModel(new DefaultComboBoxModel(distritos));
                     comboBox.hidePopup();
+                    comboBox.setSelectedItem(null); // También reinicia si se borra todo
                     return;
                 }
 
-                // Solo busca coincidencias que EMPIECEN por el texto
                 Vector<String> coincidencias = new Vector<>();
                 for (String item : distritos) {
                     if (item.toLowerCase().startsWith(texto.toLowerCase())) {
@@ -76,6 +79,8 @@ public class JInternalFrameTablaClientes extends javax.swing.JInternalFrame {
         JOptionPane.showMessageDialog(null, "Error al cargar distritos: " + e.getMessage());
     }
 }
+
+
 
 
     /**
