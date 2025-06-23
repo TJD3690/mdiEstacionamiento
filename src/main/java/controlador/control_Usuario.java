@@ -38,7 +38,9 @@ public class control_Usuario {
         }
         return rspta;
     }
-    /*public boolean guardar(Empleado emp) {
+    
+    //-------------------Metodo para guardar al empleado---------------------
+    public boolean guardar(Empleado emp) {
         boolean respuesta = false;
         Connection cn = conexion.Conexion.establecerConexion();
         try {
@@ -58,7 +60,7 @@ public class control_Usuario {
             consulta.setInt(1, nextId);
             consulta.setInt(2, emp.getCodNacio());
             consulta.setInt(3, emp.getCodSexo());
-            consulta.setInt(4, emp.getCodDistrito());
+            //consulta.setString(4, emp.getCodDistrito());
             consulta.setString(5, emp.getNombres());
             consulta.setString(6, emp.getApellidos());
             consulta.setString(7, emp.getPassword());
@@ -80,9 +82,9 @@ public class control_Usuario {
 
         return respuesta;
     }
-*/
-    /* 
-    public boolean existeEmpleado(String categoria) {
+
+    //--------------------Si no existe Empleado/Usuario----------------------------
+    /*public boolean existeEmpleado(String categoria) {
         boolean respuesta = false;
         String sql = "select descripcion from tb_categoria where descripcion = '" + categoria + "';";
         Statement st;

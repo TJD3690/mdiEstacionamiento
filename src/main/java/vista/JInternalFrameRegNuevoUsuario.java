@@ -14,6 +14,8 @@ import java.sql.*;
 import java.util.Vector;
 import conexion.Conexion;
 
+import Gestion.Distrito;
+
 /**
  *
  * @author LENOVO
@@ -29,6 +31,7 @@ public class JInternalFrameRegNuevoUsuario extends javax.swing.JInternalFrame {
 
         
     }
+    //-----------------------El autocompletado del comboBBox
     private void cargarDistritosAutoCompletar(JComboBox comboBox) {
     try {
         Connection con = Conexion.establecerConexion();
@@ -307,7 +310,7 @@ public class JInternalFrameRegNuevoUsuario extends javax.swing.JInternalFrame {
 
         btnLimpiar.setText("LIMPIAR");
         jPanel1.add(btnLimpiar);
-        btnLimpiar.setBounds(230, 420, 75, 23);
+        btnLimpiar.setBounds(230, 420, 100, 23);
 
         btnGuardar.setText("GUARDAR");
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
@@ -316,9 +319,14 @@ public class JInternalFrameRegNuevoUsuario extends javax.swing.JInternalFrame {
             }
         });
         jPanel1.add(btnGuardar);
-        btnGuardar.setBounds(70, 420, 84, 23);
+        btnGuardar.setBounds(70, 420, 100, 23);
 
         DistritoUsuario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        DistritoUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DistritoUsuarioActionPerformed(evt);
+            }
+        });
         jPanel1.add(DistritoUsuario);
         DistritoUsuario.setBounds(200, 260, 180, 22);
 
@@ -452,7 +460,7 @@ if (text.length() >= lim || !Character.isDigit(c)) {
     }//GEN-LAST:event_txtNumDocNUsuarioKeyTyped
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-       /* Empleado emp= new Empleado();
+        Empleado emp= new Empleado();
         control_Usuario control_User=new control_Usuario();
         
         emp.setNombres(txtNombresNUsuario.getText().trim());
@@ -478,8 +486,12 @@ if (text.length() >= lim || !Character.isDigit(c)) {
             } else {
                  JOptionPane.showMessageDialog(null, "Error al guardar");
             }
-        }*/
+        }
     }//GEN-LAST:event_btnGuardarActionPerformed
+
+    private void DistritoUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DistritoUsuarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_DistritoUsuarioActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

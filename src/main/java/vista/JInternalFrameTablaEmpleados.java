@@ -539,7 +539,7 @@ if (c == ' ' && text.endsWith(" ")) {
                 txtNombres.setText      (rs.getString("Nombres"));
                 txtApellidos.setText    (rs.getString("Apellidos"));
                 cbxNacionalidad.setSelectedItem(rs.getString("Nacionalidad"));
-                DistritoEmpleado.addItem(rs.getString("Distrito"));
+                DistritoEmpleado.setSelectedItem(rs.getString("Distrito"));
                 txtContraseña.setText   (rs.getString("Password"));
                 txtNumDoc.setText       (rs.getString("NumDoc"));
                 txtTelefono.setText     (rs.getString("Telefono"));
