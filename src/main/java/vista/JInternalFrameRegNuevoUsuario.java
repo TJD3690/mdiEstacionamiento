@@ -4,7 +4,10 @@
  */
 package vista;
 
+import Gestion.Empleado;
+import controlador.*;
 import java.awt.Dimension;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -15,7 +18,7 @@ public class JInternalFrameRegNuevoUsuario extends javax.swing.JInternalFrame {
     int obtenerIdUsuario=0;
     public JInternalFrameRegNuevoUsuario() {
         initComponents();
-        this.setSize(new Dimension(420,469));
+        this.setSize(new Dimension(420, 486));
         this.setTitle("Registrar Nuevo Usuario");
         
     }
@@ -36,6 +39,7 @@ public class JInternalFrameRegNuevoUsuario extends javax.swing.JInternalFrame {
         jButton1 = new javax.swing.JButton();
         buttonGroup4 = new javax.swing.ButtonGroup();
         jComboBox2 = new javax.swing.JComboBox<>();
+        jToggleButton1 = new javax.swing.JToggleButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -63,6 +67,8 @@ public class JInternalFrameRegNuevoUsuario extends javax.swing.JInternalFrame {
         cbxDistritoNUsuario = new javax.swing.JComboBox<>();
         txtNombresNUsuario = new javax.swing.JTextField();
         cbxNacionaNUsuario = new javax.swing.JComboBox<>();
+        btnLimpiar = new javax.swing.JButton();
+        btnGuardar = new javax.swing.JButton();
 
         jTextField3.setText("jTextField3");
 
@@ -73,6 +79,8 @@ public class JInternalFrameRegNuevoUsuario extends javax.swing.JInternalFrame {
         jButton1.setText("jButton1");
 
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jToggleButton1.setText("jToggleButton1");
 
         setClosable(true);
         setIconifiable(true);
@@ -229,7 +237,7 @@ public class JInternalFrameRegNuevoUsuario extends javax.swing.JInternalFrame {
         jPanel1.add(jRadioButton3);
         jRadioButton3.setBounds(300, 320, 70, 21);
 
-        cbxDistritoNUsuario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "No Especificado", "Peruana", "Extranjera" }));
+        cbxDistritoNUsuario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "No Especificado", "Lima                                                                                                                                          1", "Peruana", "Extranjera" }));
         cbxDistritoNUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbxDistritoNUsuarioActionPerformed(evt);
@@ -255,7 +263,20 @@ public class JInternalFrameRegNuevoUsuario extends javax.swing.JInternalFrame {
         jPanel1.add(cbxNacionaNUsuario);
         cbxNacionaNUsuario.setBounds(200, 230, 180, 22);
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 410, 430));
+        btnLimpiar.setText("LIMPIAR");
+        jPanel1.add(btnLimpiar);
+        btnLimpiar.setBounds(230, 420, 75, 23);
+
+        btnGuardar.setText("GUARDAR");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnGuardar);
+        btnGuardar.setBounds(70, 420, 84, 23);
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 410, 460));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -388,8 +409,40 @@ if (text.length() >= lim || !Character.isDigit(c)) {
 }
     }//GEN-LAST:event_txtNumDocNUsuarioKeyTyped
 
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+       /* Empleado emp= new Empleado();
+        control_Usuario control_User=new control_Usuario();
+        
+        emp.setNombres(txtNombresNUsuario.getText().trim());
+        emp.setApellidos(txtApellidosNUsuario.getText().trim());
+        //emp.setCodDistrito(cbxDistritoNUsuario.getSelectedItem());
+        emp.setApellidos(txtApellidosNUsuario.getText().trim());
+        emp.setApellidos(txtApellidosNUsuario.getText().trim());
+        emp.setApellidos(txtApellidosNUsuario.getText().trim());
+        emp.setApellidos(txtApellidosNUsuario.getText().trim());
+        
+        emp.setNombres(title);
+        emp.setNombres(title);
+        emp.setNombres(title);
+        emp.setNombres(title);
+        emp.setNombres(title);
+        
+        if(txtNombresNUsuario.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Ingrese todos los campos");
+        }
+        else{
+            if (control_User.guardar(emp)) {
+                JOptionPane.showMessageDialog(null, "Registro guardado");
+            } else {
+                 JOptionPane.showMessageDialog(null, "Error al guardar");
+            }
+        }*/
+    }//GEN-LAST:event_btnGuardarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnGuardar;
+    private javax.swing.JButton btnLimpiar;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup4;
     private javax.swing.JTextField cbxDireccionNUsuario;
@@ -417,6 +470,7 @@ if (text.length() >= lim || !Character.isDigit(c)) {
     private javax.swing.JRadioButton jRadioButton3;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField5;
+    private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JTextField txtApellidosNUsuario;
     private javax.swing.JTextField txtContraNUsuario;
     private javax.swing.JTextField txtCorreoNUsuario;

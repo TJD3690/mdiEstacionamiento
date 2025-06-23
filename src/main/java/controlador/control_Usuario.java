@@ -38,76 +38,67 @@ public class control_Usuario {
         }
         return rspta;
     }
-    //-----------------Metodo para Guardar Usuario/Empleado-------------------------------
-    public boolean guardar(Empleado emp){
-        boolean rpta=false;
-        Connection cn=conexion.Conexion.establecerConexion();
+    /*public boolean guardar(Empleado emp) {
+        boolean respuesta = false;
+        Connection cn = conexion.Conexion.establecerConexion();
         try {
-            PreparedStatement consulta =cn.prepareStatement("insert into dbo.Empleado (IdEmpleado,CodNacio, CodSexo, CodDistrito, Nombres, Apellidos, Password, NumDoc, Telefono, Correo, Direccion) "
-                    + "                                      values(?,?,?,?,?,?,?,?,?,?,?)");
-            consulta.setInt(1, emp.getIdEmpleado());
+            String sqlMax = "SELECT COALESCE(MAX(IdEmpleado), 0) FROM dbo.Empleado";
+            PreparedStatement psMax = cn.prepareStatement(sqlMax);
+            ResultSet rs = psMax.executeQuery();
+            int nextId = 1;
+            if (rs.next()) {
+                nextId = rs.getInt(1) + 1;
+            }
+            rs.close();
+            psMax.close();
+            
+            PreparedStatement consulta = cn.prepareStatement("INSERT INTO dbo.Empleado " +
+            "(IdEmpleado, CodNacio, CodSexo, CodDistrito,Nombres, Apellidos, Password, NumDoc, Telefono, Correo, Direccion, Usuario) "
+            + "VALUES(?,?,?,?,?,?,?,?,?,?,?,?)");
+            consulta.setInt(1, nextId);
             consulta.setInt(2, emp.getCodNacio());
             consulta.setInt(3, emp.getCodSexo());
             consulta.setInt(4, emp.getCodDistrito());
             consulta.setString(5, emp.getNombres());
             consulta.setString(6, emp.getApellidos());
-            consulta.setString(6, emp.getUsuario());
             consulta.setString(7, emp.getPassword());
             consulta.setString(8, emp.getNumDoc());
             consulta.setInt(9, emp.getTelefono());
             consulta.setString(10, emp.getCorreo());
             consulta.setString(11, emp.getDireccion());
-            
-            if(consulta.executeUpdate()>0)rpta=true;
+            consulta.setString(12, emp.getUsuario());
+
+            if (consulta.executeUpdate() > 0) {
+                respuesta = true;
+            }
+
             cn.close();
+
         } catch (SQLException e) {
-            System.out.println("Error al guardar Nuevo Usuario: "+ e);
+            System.out.println("Error al guardar usuario/empleado: " + e);
         }
-        return rpta;
+
+        return respuesta;
     }
-    
-    //-------------Metodo guardado2-------------
-    public DefaultTableModel getTablaEmpleados() {
-    
-    String[] columnas = {
-        "ID","Nacionalidad","Sexo","Distrito",
-        "Nombres","Apellidos","Usuario","Password",
-        "NumDoc","Teléfono","Correo","Dirección"
-    };
-    DefaultTableModel modelo = new DefaultTableModel(columnas, 0);
+*/
+    /* 
+    public boolean existeEmpleado(String categoria) {
+        boolean respuesta = false;
+        String sql = "select descripcion from tb_categoria where descripcion = '" + categoria + "';";
+        Statement st;
 
-    
-    String sql = "SELECT IdEmpleado, CodNacio, CodSexo, CodDistrito, " +
-                 "Nombres, Apellidos, Usuario, Password, NumDoc, Telefono, Correo, Direccion " +
-                 "FROM dbo.Empleado";
+        try {
+            Connection cn = Conexion.conectar();
+            st = cn.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            while (rs.next()) {
+                respuesta = true;
+            }
 
-    try (Connection cn = Conexion.establecerConexion();
-         PreparedStatement ps = cn.prepareStatement(sql);
-         ResultSet rs = ps.executeQuery()) {
-
-
-        while (rs.next()) {
-            Object[] fila = new Object[12];
-            fila[0] = rs.getInt("IdEmpleado");
-            fila[1] = rs.getInt("CodNacio");
-            fila[2] = rs.getInt("CodSexo");
-            fila[3] = rs.getInt("CodDistrito");
-            fila[4] = rs.getString("Nombres");
-            fila[5] = rs.getString("Apellidos");
-            fila[6] = rs.getString("Usuario");
-            fila[7] = rs.getString("Password");
-            fila[8] = rs.getString("NumDoc");
-            fila[9] = rs.getInt("Telefono");
-            fila[10] = rs.getString("Correo");
-            fila[11] = rs.getString("Direccion");
-            modelo.addRow(fila);
+        } catch (SQLException e) {
+            System.out.println("Error al consultar cartegoria: " + e);
         }
-    } catch (SQLException ex) {
-        ex.printStackTrace();
-    }
-
-    return modelo;
-}
-
-    
+        return respuesta;
+    }*/
+        
 }
