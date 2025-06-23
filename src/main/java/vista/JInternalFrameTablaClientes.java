@@ -5,6 +5,13 @@
 package vista;
 
 import java.awt.Dimension;
+import javax.swing.*;
+import javax.swing.JTextField;
+import java.sql.*;
+import java.util.Vector;
+import conexion.Conexion;
+
+
 
 /**
  *
@@ -18,7 +25,58 @@ public class JInternalFrameTablaClientes extends javax.swing.JInternalFrame {
         this.setSize(new Dimension(894, 553));
         //this.setExtendedState(this.MAXIMIZED_BOTH);
         this.setTitle("Clientes");
+        cargarDistritosAutoCompletar(DistritoCLiente);
     }
+    private void cargarDistritosAutoCompletar(JComboBox comboBox) {
+    try {
+        Connection con = Conexion.establecerConexion();
+        String sql = "SELECT Nombre FROM Distrito ORDER BY Nombre";
+        PreparedStatement ps = con.prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
+
+        // Lista original de distritos
+        Vector<String> distritos = new Vector<>();
+        while (rs.next()) {
+            distritos.add(rs.getString("Nombre"));
+        }
+
+        comboBox.setEditable(true);
+        comboBox.setModel(new DefaultComboBoxModel(distritos));
+        JTextField editor = (JTextField) comboBox.getEditor().getEditorComponent();
+
+        editor.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                String texto = editor.getText();
+
+                if (texto.length() == 0) {
+                    comboBox.hidePopup();
+                    return;
+                }
+
+                // Solo busca coincidencias que EMPIECEN por el texto
+                Vector<String> coincidencias = new Vector<>();
+                for (String item : distritos) {
+                    if (item.toLowerCase().startsWith(texto.toLowerCase())) {
+                        coincidencias.add(item);
+                    }
+                }
+
+                if (!coincidencias.isEmpty()) {
+                    comboBox.setModel(new DefaultComboBoxModel(coincidencias));
+                    comboBox.setSelectedItem(texto);
+                    comboBox.showPopup();
+                } else {
+                    comboBox.hidePopup();
+                }
+            }
+        });
+
+        con.close();
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(null, "Error al cargar distritos: " + e.getMessage());
+    }
+}
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -44,7 +102,6 @@ public class JInternalFrameTablaClientes extends javax.swing.JInternalFrame {
         txtNombresCliente = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         txtContraNCliente = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
@@ -59,7 +116,8 @@ public class JInternalFrameTablaClientes extends javax.swing.JInternalFrame {
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         NumLicencia = new javax.swing.JTextField();
-        cbxNacionaNCliente = new javax.swing.JComboBox<>();
+        DistritoCLiente = new javax.swing.JComboBox<>();
+        cbxNacionaNCliente1 = new javax.swing.JComboBox<>();
 
         setClosable(true);
         setIconifiable(true);
@@ -154,7 +212,6 @@ public class JInternalFrameTablaClientes extends javax.swing.JInternalFrame {
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel7.setText("Distrito:");
         jPanel6.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 70, -1, -1));
-        jPanel6.add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 90, 180, -1));
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel8.setText("Contraseña:");
@@ -233,8 +290,11 @@ public class JInternalFrameTablaClientes extends javax.swing.JInternalFrame {
         });
         jPanel6.add(NumLicencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 150, 180, -1));
 
-        cbxNacionaNCliente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "No Especificado", "Peruana", "Extranjera" }));
-        jPanel6.add(cbxNacionaNCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 30, 180, -1));
+        DistritoCLiente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "No Especificado", "Peruana", "Extranjera" }));
+        jPanel6.add(DistritoCLiente, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 90, 180, -1));
+
+        cbxNacionaNCliente1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "No Especificado", "Peruana", "Extranjera" }));
+        jPanel6.add(cbxNacionaNCliente1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 30, 180, -1));
 
         jPanel1.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 330, 860, 180));
 
@@ -399,9 +459,10 @@ if (!Character.isLetterOrDigit(c)) {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> DistritoCLiente;
     private javax.swing.JTextField NumLicencia;
     private javax.swing.JTextField cbxDireccionNCliente;
-    private javax.swing.JComboBox<String> cbxNacionaNCliente;
+    private javax.swing.JComboBox<String> cbxNacionaNCliente1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
@@ -422,7 +483,6 @@ if (!Character.isLetterOrDigit(c)) {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableEmpleados;
-    private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField txtApellidosNClientes;
     private javax.swing.JTextField txtContraNCliente;
     private javax.swing.JTextField txtCorreoNCliente;
