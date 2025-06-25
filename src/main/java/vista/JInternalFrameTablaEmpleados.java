@@ -25,7 +25,39 @@ public class JInternalFrameTablaEmpleados extends javax.swing.JInternalFrame {
         this.setSize(new Dimension(894, 553));
         this.CargarTablaEmpleado();
         this.setTitle("Empleados");
+        buttonGroup1 = new javax.swing.ButtonGroup();
+        buttonGroup1.add(HombreEmpleado);
+buttonGroup1.add(MujerEmpleado);
+
         cargarDistritosAutoCompletar(DistritoEmpleado);
+        EliminarBotonEmpleado.addActionListener(new java.awt.event.ActionListener() {
+    public void actionPerformed(java.awt.event.ActionEvent evt) {
+        int fila = jTableEmpleados.getSelectedRow();
+
+        if (fila >= 0) {
+            int confirm = JOptionPane.showConfirmDialog(null, "¿Estás seguro de eliminar este empleado?", "Confirmar eliminación", JOptionPane.YES_NO_OPTION);
+            if (confirm == JOptionPane.YES_OPTION) {
+                int idEmpleado = Integer.parseInt(jTableEmpleados.getValueAt(fila, 0).toString());
+
+                try (Connection cn = Conexion.establecerConexion();
+                     PreparedStatement pst = cn.prepareStatement("DELETE FROM Empleado WHERE IdEmpleado = ?")) {
+
+                    pst.setInt(1, idEmpleado);
+                    pst.executeUpdate();
+
+                    JOptionPane.showMessageDialog(null, "Empleado eliminado correctamente.");
+                    CargarTablaEmpleado(); // Refresca la tabla
+
+                } catch (SQLException e) {
+                    JOptionPane.showMessageDialog(null, "Error al eliminar el empleado: " + e.getMessage());
+                }
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Seleccione un empleado para eliminar.");
+        }
+    }
+});
+
         BuscarEmpleadoBoton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 String dni = BuscarEmpleado.getText().trim();
@@ -144,6 +176,7 @@ private void buscarEmpleadoPorDni(String dni) {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
@@ -156,7 +189,7 @@ private void buscarEmpleadoPorDni(String dni) {
         };
         jPanel4 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        EliminarBotonEmpleado = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         txtApellidos = new javax.swing.JTextField();
@@ -178,8 +211,8 @@ private void buscarEmpleadoPorDni(String dni) {
         jLabel13 = new javax.swing.JLabel();
         cbxNacionalidad = new javax.swing.JComboBox<>();
         DistritoEmpleado = new javax.swing.JComboBox<>();
-        HombreCliente = new javax.swing.JRadioButton();
-        MujerCliente = new javax.swing.JRadioButton();
+        HombreEmpleado = new javax.swing.JRadioButton();
+        MujerEmpleado = new javax.swing.JRadioButton();
         jLabel14 = new javax.swing.JLabel();
         BuscarEmpleado = new javax.swing.JTextField();
         BuscarEmpleadoBoton = new javax.swing.JButton();
@@ -239,8 +272,8 @@ private void buscarEmpleadoPorDni(String dni) {
         });
         jPanel4.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
 
-        jButton2.setText("ELIMINAR");
-        jPanel4.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 100, -1));
+        EliminarBotonEmpleado.setText("ELIMINAR");
+        jPanel4.add(EliminarBotonEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 100, -1));
 
         jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 60, 140, 90));
 
@@ -355,21 +388,21 @@ private void buscarEmpleadoPorDni(String dni) {
         DistritoEmpleado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "No Especificado", "Peruana", "Extranjera" }));
         jPanel6.add(DistritoEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 90, 180, -1));
 
-        HombreCliente.setText("Masculino");
-        HombreCliente.addActionListener(new java.awt.event.ActionListener() {
+        HombreEmpleado.setText("Masculino");
+        HombreEmpleado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                HombreClienteActionPerformed(evt);
+                HombreEmpleadoActionPerformed(evt);
             }
         });
-        jPanel6.add(HombreCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 150, -1, -1));
+        jPanel6.add(HombreEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 150, -1, -1));
 
-        MujerCliente.setText("Femenino");
-        MujerCliente.addActionListener(new java.awt.event.ActionListener() {
+        MujerEmpleado.setText("Femenino");
+        MujerEmpleado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MujerClienteActionPerformed(evt);
+                MujerEmpleadoActionPerformed(evt);
             }
         });
-        jPanel6.add(MujerCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 150, -1, -1));
+        jPanel6.add(MujerEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 150, -1, -1));
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel14.setText("Sexo");
@@ -605,13 +638,13 @@ if (c == ' ' && text.endsWith(" ")) {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTableEmpleadosKeyTyped
 
-    private void HombreClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HombreClienteActionPerformed
+    private void HombreEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HombreEmpleadoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_HombreClienteActionPerformed
+    }//GEN-LAST:event_HombreEmpleadoActionPerformed
 
-    private void MujerClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MujerClienteActionPerformed
+    private void MujerEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MujerEmpleadoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_MujerClienteActionPerformed
+    }//GEN-LAST:event_MujerEmpleadoActionPerformed
 
     private void BuscarEmpleadoBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarEmpleadoBotonActionPerformed
         String dni = BuscarEmpleado.getText().trim();
@@ -633,11 +666,12 @@ if (c == ' ' && text.endsWith(" ")) {
     private javax.swing.JTextField BuscarEmpleado;
     private javax.swing.JButton BuscarEmpleadoBoton;
     private javax.swing.JComboBox<String> DistritoEmpleado;
-    private javax.swing.JRadioButton HombreCliente;
-    private javax.swing.JRadioButton MujerCliente;
+    private javax.swing.JButton EliminarBotonEmpleado;
+    private javax.swing.JRadioButton HombreEmpleado;
+    private javax.swing.JRadioButton MujerEmpleado;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> cbxNacionalidad;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -726,13 +760,15 @@ if (c == ' ' && text.endsWith(" ")) {
     /////
     private void EnviarDatosEmpleadoSeleccionado(int idEmpleado) {
     String sql = ""
-      + "SELECT E.Nombres, E.Apellidos, N.Nombre AS Nacionalidad, "
-      + "       D.Nombre AS Distrito, E.Password, E.NumDoc, "
-      + "       E.Telefono, E.Correo, E.Direccion, E.Usuario "
-      + "  FROM Empleado E "
-      + "  JOIN Nacionalidad N ON E.CodNacio   = N.CodNacio "
-      + "  JOIN Distrito    D ON E.CodDistrito = D.CodDistrito "
-      + " WHERE E.IdEmpleado = ?";
+    + "SELECT E.Nombres, E.Apellidos, N.Nombre AS Nacionalidad, "
+    + "       S.Nombre AS Sexo, D.Nombre AS Distrito, E.Password, E.NumDoc, "
+    + "       E.Telefono, E.Correo, E.Direccion, E.Usuario "
+    + "FROM Empleado E "
+    + "JOIN Nacionalidad N ON E.CodNacio = N.CodNacio "
+    + "JOIN Sexo S ON E.CodSexo = S.CodSexo "  // 👈 IMPORTANTE
+    + "JOIN Distrito D ON E.CodDistrito = D.CodDistrito "
+    + "WHERE E.IdEmpleado = ?";
+
     try ( Connection cn = Conexion.establecerConexion();
           PreparedStatement pst = cn.prepareStatement(sql) ) {
 
@@ -749,6 +785,14 @@ if (c == ' ' && text.endsWith(" ")) {
                 txtCorreo.setText       (rs.getString("Correo"));
                 txtDireccion.setText    (rs.getString("Direccion"));
                 txtUsuario.setText      (rs.getString("Usuario"));
+String sexo = rs.getString("Sexo");
+if ("Masculino".equalsIgnoreCase(sexo)) {
+    HombreEmpleado.setSelected(true);
+} else if ("Femenino".equalsIgnoreCase(sexo)) {
+    MujerEmpleado.setSelected(true);
+}
+
+
             }
         }
     } catch (SQLException e) {
