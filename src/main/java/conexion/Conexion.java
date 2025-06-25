@@ -8,8 +8,8 @@ public class Conexion {
 
     static Connection conectar= null;
     
-    static String usuario = "UserSQL_T";
-    static String contrasenia = "NuevaContraseña123";
+   static String usuario = "UserSQL_T";
+    static String contrasenia = "#Tania002244";
     static String baseDatos= "EstacionamientoPRUEBA";
     static String ip= "localhost";
     static String puerto="1433";

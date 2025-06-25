@@ -42,8 +42,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jRegistrarEntrada = new javax.swing.JMenuItem();
         jRegistrarSalida = new javax.swing.JMenuItem();
         jRegistrarNuevoUsuario = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jReportes = new javax.swing.JMenu();
-        jCerrarSesion = new javax.swing.JMenu();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem2 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(600, 400));
@@ -104,15 +106,36 @@ public class MenuPrincipal extends javax.swing.JFrame {
         });
         jRegistrar.add(jRegistrarNuevoUsuario);
 
+        jMenuItem1.setText("Nuevo Cliente");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jRegistrar.add(jMenuItem1);
+
         jMenuBar1.add(jRegistrar);
 
         jReportes.setText("REPORTES");
         jReportes.setPreferredSize(new java.awt.Dimension(150, 25));
         jMenuBar1.add(jReportes);
 
-        jCerrarSesion.setText("Cerrar Sesión");
-        jCerrarSesion.setPreferredSize(new java.awt.Dimension(150, 25));
-        jMenuBar1.add(jCerrarSesion);
+        jMenu1.setText("CERRAR SESION");
+        jMenu1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu1ActionPerformed(evt);
+            }
+        });
+
+        jMenuItem2.setText("Log Out");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem2);
+
+        jMenuBar1.add(jMenu1);
 
         setJMenuBar(jMenuBar1);
 
@@ -167,6 +190,22 @@ public class MenuPrincipal extends javax.swing.JFrame {
         interVhc.setVisible(true);
     }//GEN-LAST:event_jTablaVehiculosActionPerformed
 
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+ JInternalFrameRegNuevoCliente interNuevoCliente = new JInternalFrameRegNuevoCliente();
+        JDesktopPane_menu.add(interNuevoCliente);
+        interNuevoCliente.setVisible(true);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
+        
+    }//GEN-LAST:event_jMenu1ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        this.dispose();
+         frmLogin login =new frmLogin();
+        login.setVisible(true);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -203,8 +242,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu jCerrarSesion;
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenu jRegistrar;
     private javax.swing.JMenuItem jRegistrarEntrada;
     private javax.swing.JMenuItem jRegistrarNuevoUsuario;
