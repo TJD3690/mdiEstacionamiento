@@ -219,7 +219,7 @@ private void buscarClientePorDni(String dni) {
             txtTelefonoNCliente = new javax.swing.JTextField();
             jLabel11 = new javax.swing.JLabel();
             txtCorreoNCliente = new javax.swing.JTextField();
-            cbxDireccionNCliente = new javax.swing.JTextField();
+            txtDireccionNCliente = new javax.swing.JTextField();
             jLabel12 = new javax.swing.JLabel();
             txtNUsuarioCliente = new javax.swing.JTextField();
             jLabel13 = new javax.swing.JLabel();
@@ -376,12 +376,12 @@ private void buscarClientePorDni(String dni) {
             });
             jPanel6.add(txtCorreoNCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 90, 180, -1));
 
-            cbxDireccionNCliente.addKeyListener(new java.awt.event.KeyAdapter() {
+            txtDireccionNCliente.addKeyListener(new java.awt.event.KeyAdapter() {
                 public void keyTyped(java.awt.event.KeyEvent evt) {
-                    cbxDireccionNClienteKeyTyped(evt);
+                    txtDireccionNClienteKeyTyped(evt);
                 }
             });
-            jPanel6.add(cbxDireccionNCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 180, -1));
+            jPanel6.add(txtDireccionNCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 180, -1));
 
             jLabel12.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
             jLabel12.setText("Dirección:");
@@ -454,7 +454,7 @@ private void buscarClientePorDni(String dni) {
         }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+    
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void txtNombresClienteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombresClienteKeyTyped
@@ -555,8 +555,8 @@ if (!Character.isLetterOrDigit(c) && permitidos.indexOf(c) == -1) {
 }
     }//GEN-LAST:event_txtCorreoNClienteKeyTyped
 
-    private void cbxDireccionNClienteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cbxDireccionNClienteKeyTyped
-        String text = cbxDireccionNCliente.getText(); // texto actual
+    private void txtDireccionNClienteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDireccionNClienteKeyTyped
+        String text = txtDireccionNCliente.getText(); // texto actual
 int lim = 50;
 char c = evt.getKeyChar(); // carácter actual
 
@@ -582,7 +582,7 @@ if (text.isEmpty() && c == ' ') {
 if (c == ' ' && text.endsWith(" ")) {
     evt.consume();
 }
-    }//GEN-LAST:event_cbxDireccionNClienteKeyTyped
+    }//GEN-LAST:event_txtDireccionNClienteKeyTyped
 
     private void txtNumDocNClienteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumDocNClienteKeyTyped
         String text = txtNumDocNCliente.getText();
@@ -641,7 +641,6 @@ if (!Character.isLetterOrDigit(c)) {
     private javax.swing.JRadioButton MujerCliente;
     private javax.swing.JTextField NumLicencia;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JTextField cbxDireccionNCliente;
     private javax.swing.JComboBox<String> cbxNacionaNCliente1;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
@@ -666,6 +665,7 @@ if (!Character.isLetterOrDigit(c)) {
     private javax.swing.JTextField txtApellidosNClientes;
     private javax.swing.JTextField txtContraNCliente;
     private javax.swing.JTextField txtCorreoNCliente;
+    private javax.swing.JTextField txtDireccionNCliente;
     private javax.swing.JTextField txtNUsuarioCliente;
     private javax.swing.JTextField txtNombresCliente;
     private javax.swing.JTextField txtNumDocNCliente;
@@ -764,7 +764,7 @@ private void EnviarDatosClienteSeleccionado(int idCliente) {
                 NumLicencia.setText(rs.getString("NroLicencia"));
                 txtTelefonoNCliente.setText(rs.getString("Telefono"));
                 txtCorreoNCliente.setText(rs.getString("Correo"));
-                cbxDireccionNCliente.setText(rs.getString("Direccion"));
+                txtDireccionNCliente.setText(rs.getString("Direccion"));
                 
                 // Depuración: Verificar si se obtiene el valor de 'Usuario' correctamente
                 String usuario = rs.getString("Usuario");

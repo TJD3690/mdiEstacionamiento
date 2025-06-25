@@ -116,6 +116,9 @@ public class JInternalFrameTablaEmpleados extends javax.swing.JInternalFrame {
         jLabel13 = new javax.swing.JLabel();
         cbxNacionalidad = new javax.swing.JComboBox<>();
         DistritoEmpleado = new javax.swing.JComboBox<>();
+        HombreCliente = new javax.swing.JRadioButton();
+        MujerCliente = new javax.swing.JRadioButton();
+        jLabel14 = new javax.swing.JLabel();
 
         setClosable(true);
         setIconifiable(true);
@@ -288,6 +291,26 @@ public class JInternalFrameTablaEmpleados extends javax.swing.JInternalFrame {
         DistritoEmpleado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "No Especificado", "Peruana", "Extranjera" }));
         jPanel6.add(DistritoEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 90, 180, -1));
 
+        HombreCliente.setText("Masculino");
+        HombreCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                HombreClienteActionPerformed(evt);
+            }
+        });
+        jPanel6.add(HombreCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 150, -1, -1));
+
+        MujerCliente.setText("Femenino");
+        MujerCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MujerClienteActionPerformed(evt);
+            }
+        });
+        jPanel6.add(MujerCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 150, -1, -1));
+
+        jLabel14.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel14.setText("Sexo");
+        jPanel6.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 130, -1, -1));
+
         jPanel1.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, 860, 180));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 890, 520));
@@ -296,7 +319,71 @@ public class JInternalFrameTablaEmpleados extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+    int selectedRow = jTableEmpleados.getSelectedRow();
+    if (selectedRow == -1) {
+        JOptionPane.showMessageDialog(null, "Seleccione un empleado para actualizar.");
+        return;
+    }
+    int idEmpleado = Integer.parseInt(jTableEmpleados.getValueAt(selectedRow, 0).toString());
+
+    String nombres = txtNombres.getText();
+    String apellidos = txtApellidos.getText();
+    String nacionalidad = (String) cbxNacionalidad.getSelectedItem();
+    String distrito = (String) DistritoEmpleado.getSelectedItem();
+    String password = txtContraseña.getText();
+    String numDoc = txtNumDoc.getText();
+    String telefono = txtTelefono.getText();
+    String correo = txtCorreo.getText();
+    String direccion = txtDireccion.getText();
+    String usuario = txtUsuario.getText();
+
+    if (nombres.isEmpty() || apellidos.isEmpty() || numDoc.isEmpty() || telefono.isEmpty()) {
+        JOptionPane.showMessageDialog(null, "Complete los campos obligatorios.");
+        return;
+    }
+
+    int codNacio = getCodNacio(nacionalidad);
+    // Asumimos que el sexo se obtiene de otro campo o es fijo (ajústalo según tu interfaz)
+    int codSexo = getCodSexo("Masculino"); // Cambia "Masculino" por el valor real si lo tienes
+    int codDistrito = getCodDistrito(distrito);
+
+    Connection cn = null;
+    PreparedStatement pst = null;
+    try {
+        cn = Conexion.establecerConexion();
+        String sql = "UPDATE dbo.Empleado SET Nombres = ?, Apellidos = ?, CodNacio = ?, CodSexo = ?, CodDistrito = ?, Password = ?, NumDoc = ?, Telefono = ?, Correo = ?, Direccion = ?, Usuario = ? WHERE IdEmpleado = ?";
+        pst = cn.prepareStatement(sql);
+        pst.setString(1, nombres);
+        pst.setString(2, apellidos);
+        pst.setInt(3, codNacio);
+        pst.setInt(4, codSexo);
+        pst.setInt(5, codDistrito);
+        pst.setString(6, password);
+        pst.setString(7, numDoc);
+        pst.setString(8, telefono);
+        pst.setString(9, correo);
+        pst.setString(10, direccion);
+        pst.setString(11, usuario);
+        pst.setInt(12, idEmpleado);
+
+        int rowsAffected = pst.executeUpdate();
+        if (rowsAffected > 0) {
+            JOptionPane.showMessageDialog(null, "Empleado actualizado correctamente.");
+            CargarTablaEmpleado();
+        } else {
+            JOptionPane.showMessageDialog(null, "No se pudo actualizar el empleado.");
+        }
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(null, "Error al actualizar: " + e.getMessage());
+        e.printStackTrace();
+    } finally {
+        try {
+            if (pst != null) pst.close();
+            if (cn != null) cn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void txtNombresKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombresKeyTyped
@@ -439,9 +526,19 @@ if (c == ' ' && text.endsWith(" ")) {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTableEmpleadosKeyTyped
 
+    private void HombreClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HombreClienteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_HombreClienteActionPerformed
+
+    private void MujerClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MujerClienteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_MujerClienteActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> DistritoEmpleado;
+    private javax.swing.JRadioButton HombreCliente;
+    private javax.swing.JRadioButton MujerCliente;
     private javax.swing.JComboBox<String> cbxNacionalidad;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -450,6 +547,7 @@ if (c == ' ' && text.endsWith(" ")) {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -562,4 +660,95 @@ if (c == ' ' && text.endsWith(" ")) {
     }
 }
 
+    private int getCodNacio(String nacionalidad) {
+    Connection cn = null;
+    PreparedStatement pst = null;
+    ResultSet rs = null;
+    int codNacio = 0; // Valor por defecto si no se encuentra
+    try {
+        cn = Conexion.establecerConexion();
+        String sql = "SELECT CodNacio FROM Nacionalidad WHERE Nombre = ?";
+        pst = cn.prepareStatement(sql);
+        pst.setString(1, nacionalidad);
+        rs = pst.executeQuery();
+        if (rs.next()) {
+            codNacio = rs.getInt("CodNacio");
+        } else {
+            // Manejo si no se encuentra la nacionalidad (puedes lanzar un error o usar un valor por defecto)
+            System.out.println("Nacionalidad no encontrada: " + nacionalidad);
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+        JOptionPane.showMessageDialog(null, "Error al obtener CodNacio: " + e.getMessage());
+    } finally {
+        try {
+            if (rs != null) rs.close();
+            if (pst != null) pst.close();
+            if (cn != null) cn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    return codNacio;
+}
+    private int getCodSexo(String sexo) {
+    Connection cn = null;
+    PreparedStatement pst = null;
+    ResultSet rs = null;
+    int codSexo = 0; // Valor por defecto si no se encuentra
+    try {
+        cn = Conexion.establecerConexion();
+        String sql = "SELECT CodSexo FROM Sexo WHERE Nombre = ?";
+        pst = cn.prepareStatement(sql);
+        pst.setString(1, sexo); // Por ejemplo, "Masculino" o "Femenino"
+        rs = pst.executeQuery();
+        if (rs.next()) {
+            codSexo = rs.getInt("CodSexo");
+        } else {
+            System.out.println("Sexo no encontrado: " + sexo);
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+        JOptionPane.showMessageDialog(null, "Error al obtener CodSexo: " + e.getMessage());
+    } finally {
+        try {
+            if (rs != null) rs.close();
+            if (pst != null) pst.close();
+            if (cn != null) cn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    return codSexo;
+}
+    private int getCodDistrito(String distrito) {
+    Connection cn = null;
+    PreparedStatement pst = null;
+    ResultSet rs = null;
+    int codDistrito = 0; // Valor por defecto si no se encuentra
+    try {
+        cn = Conexion.establecerConexion();
+        String sql = "SELECT CodDistrito FROM Distrito WHERE Nombre = ?";
+        pst = cn.prepareStatement(sql);
+        pst.setString(1, distrito);
+        rs = pst.executeQuery();
+        if (rs.next()) {
+            codDistrito = rs.getInt("CodDistrito");
+        } else {
+            System.out.println("Distrito no encontrado: " + distrito);
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+        JOptionPane.showMessageDialog(null, "Error al obtener CodDistrito: " + e.getMessage());
+    } finally {
+        try {
+            if (rs != null) rs.close();
+            if (pst != null) pst.close();
+            if (cn != null) cn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    return codDistrito;
+}
 }
