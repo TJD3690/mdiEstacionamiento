@@ -26,6 +26,20 @@ public class JInternalFrameTablaEmpleados extends javax.swing.JInternalFrame {
         this.CargarTablaEmpleado();
         this.setTitle("Empleados");
         cargarDistritosAutoCompletar(DistritoEmpleado);
+        BuscarEmpleadoBoton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                String dni = BuscarEmpleado.getText().trim();
+
+                System.out.println("Valor ingresado: '" + dni + "'");
+
+                if (dni.isEmpty()) {
+                    CargarTablaEmpleado(); // Muestra todos
+                } else {
+                    buscarEmpleadoPorDni(dni); // Filtro por NumDoc que empieza con...
+                }
+            }
+        });
+    
 
     }
     private void cargarDistritosAutoCompletar(JComboBox comboBox) {
@@ -72,6 +86,54 @@ public class JInternalFrameTablaEmpleados extends javax.swing.JInternalFrame {
         JOptionPane.showMessageDialog(null, "Error al cargar distritos: " + e.getMessage());
     }
 }
+private void buscarEmpleadoPorDni(String dni) {
+    DefaultTableModel model = new DefaultTableModel();
+    model.addColumn("IdEmpleado");
+    model.addColumn("Nacionalidad");
+    model.addColumn("Sexo");
+    model.addColumn("Distrito");
+    model.addColumn("Nombres");
+    model.addColumn("Apellidos");
+    model.addColumn("Password");
+    model.addColumn("NumDoc");
+    model.addColumn("Telefono");
+    model.addColumn("Correo");
+    model.addColumn("Direccion");
+    model.addColumn("Usuario");
+
+    String sql = "SELECT E.IdEmpleado, N.Nombre AS Nacionalidad, S.Nombre AS Sexo, D.Nombre AS Distrito, " +
+                 "E.Nombres, E.Apellidos, E.Password, E.NumDoc, E.Telefono, E.Correo, E.Direccion, E.Usuario " +
+                 "FROM Empleado E " +
+                 "JOIN Nacionalidad N ON E.CodNacio = N.CodNacio " +
+                 "JOIN Sexo S ON E.CodSexo = S.CodSexo " +
+                 "JOIN Distrito D ON E.CodDistrito = D.CodDistrito " +
+                 "WHERE E.NumDoc LIKE ?";
+
+    try (Connection cn = Conexion.establecerConexion();
+         PreparedStatement pst = cn.prepareStatement(sql)) {
+
+        pst.setString(1, dni + "%");  // Buscar DNIs que comienzan con ese texto
+
+        try (ResultSet rs = pst.executeQuery()) {
+            while (rs.next()) {
+                Object[] fila = new Object[12];
+                for (int i = 0; i < fila.length; i++) {
+                    fila[i] = rs.getObject(i + 1);
+                }
+                model.addRow(fila);
+            }
+        }
+
+    } catch (SQLException e) {
+        e.printStackTrace(); // sin JOptionPane
+    }
+
+    jTableEmpleados.setModel(model);
+}
+
+
+
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -119,6 +181,8 @@ public class JInternalFrameTablaEmpleados extends javax.swing.JInternalFrame {
         HombreCliente = new javax.swing.JRadioButton();
         MujerCliente = new javax.swing.JRadioButton();
         jLabel14 = new javax.swing.JLabel();
+        BuscarEmpleado = new javax.swing.JTextField();
+        BuscarEmpleadoBoton = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -312,6 +376,21 @@ public class JInternalFrameTablaEmpleados extends javax.swing.JInternalFrame {
         jPanel6.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 130, -1, -1));
 
         jPanel1.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, 860, 180));
+
+        BuscarEmpleado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BuscarEmpleadoActionPerformed(evt);
+            }
+        });
+        jPanel1.add(BuscarEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 200, 110, -1));
+
+        BuscarEmpleadoBoton.setText("BUSCAR ");
+        BuscarEmpleadoBoton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BuscarEmpleadoBotonActionPerformed(evt);
+            }
+        });
+        jPanel1.add(BuscarEmpleadoBoton, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 240, 110, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 890, 520));
 
@@ -534,8 +613,25 @@ if (c == ' ' && text.endsWith(" ")) {
         // TODO add your handling code here:
     }//GEN-LAST:event_MujerClienteActionPerformed
 
+    private void BuscarEmpleadoBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarEmpleadoBotonActionPerformed
+        String dni = BuscarEmpleado.getText().trim();
+
+        if (dni.isEmpty()) {
+            CargarTablaEmpleado(); // Método que carga todos los empleados
+        } else {
+            buscarEmpleadoPorDni(dni);
+        }
+    
+    }//GEN-LAST:event_BuscarEmpleadoBotonActionPerformed
+
+    private void BuscarEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarEmpleadoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BuscarEmpleadoActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField BuscarEmpleado;
+    private javax.swing.JButton BuscarEmpleadoBoton;
     private javax.swing.JComboBox<String> DistritoEmpleado;
     private javax.swing.JRadioButton HombreCliente;
     private javax.swing.JRadioButton MujerCliente;

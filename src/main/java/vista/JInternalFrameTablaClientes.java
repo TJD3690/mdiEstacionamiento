@@ -33,12 +33,12 @@ public class JInternalFrameTablaClientes extends javax.swing.JInternalFrame {
         
         EliminarBotonCliente.addActionListener(new java.awt.event.ActionListener() {
     public void actionPerformed(java.awt.event.ActionEvent evt) {
-        int fila = jTableEmpleados.getSelectedRow();
+        int fila = jTableClientes.getSelectedRow();
 
         if (fila >= 0) {
             int confirm = JOptionPane.showConfirmDialog(null, "¿Estás seguro de eliminar este cliente?", "Confirmar eliminación", JOptionPane.YES_NO_OPTION);
             if (confirm == JOptionPane.YES_OPTION) {
-                int idCliente = Integer.parseInt(jTableEmpleados.getValueAt(fila, 0).toString());
+                int idCliente = Integer.parseInt(jTableClientes.getValueAt(fila, 0).toString());
 
                 try (Connection cn = Conexion.establecerConexion();
                      PreparedStatement pst = cn.prepareStatement("DELETE FROM Cliente WHERE IdCliente = ?")) {
@@ -121,7 +121,7 @@ private void buscarClientePorDni(String dni) {
     }
 
     // Actualizar la tabla con los resultados de la búsqueda
-    jTableEmpleados.setModel(model);  // Actualiza la tabla con los resultados
+    jTableClientes.setModel(model);  // Actualiza la tabla con los resultados
 }
     
 
@@ -195,7 +195,7 @@ private void buscarClientePorDni(String dni) {
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTableEmpleados = new javax.swing.JTable(){
+        jTableClientes = new javax.swing.JTable(){
             @Override
             public boolean isCellEditable(int row,int col){
                 return false;//nunca editable
@@ -245,7 +245,7 @@ private void buscarClientePorDni(String dni) {
 
             jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
-            jTableEmpleados.setModel(new javax.swing.table.DefaultTableModel(
+            jTableClientes.setModel(new javax.swing.table.DefaultTableModel(
                 new Object [][] {
                     {null, null, null, null},
                     {null, null, null, null},
@@ -256,7 +256,7 @@ private void buscarClientePorDni(String dni) {
                     "Title 1", "Title 2", "Title 3", "Title 4"
                 }
             ));
-            jScrollPane1.setViewportView(jTableEmpleados);
+            jScrollPane1.setViewportView(jTableClientes);
 
             javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
             jPanel2.setLayout(jPanel2Layout);
@@ -446,6 +446,12 @@ private void buscarClientePorDni(String dni) {
                 }
             });
             jPanel1.add(BuscarCLienteBoton, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 240, 100, -1));
+
+            BuscarCliente.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    BuscarClienteActionPerformed(evt);
+                }
+            });
             jPanel1.add(BuscarCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 200, 100, -1));
 
             getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 890, 520));
@@ -631,6 +637,10 @@ if (!Character.isLetterOrDigit(c)) {
         // TODO add your handling code here:
     }//GEN-LAST:event_EliminarBotonClienteKeyTyped
 
+    private void BuscarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarClienteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BuscarClienteActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BuscarCLienteBoton;
@@ -661,7 +671,7 @@ if (!Character.isLetterOrDigit(c)) {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel6;
     public static javax.swing.JScrollPane jScrollPane1;
-    public static volatile javax.swing.JTable jTableEmpleados;
+    public static volatile javax.swing.JTable jTableClientes;
     private javax.swing.JTextField txtApellidosNClientes;
     private javax.swing.JTextField txtContraNCliente;
     private javax.swing.JTextField txtCorreoNCliente;
@@ -723,12 +733,12 @@ private void CargarTablaClientes() {
         e.printStackTrace();
     }
 
-    jTableEmpleados.setModel(model);  // Este es el JTable de clientes
+    jTableClientes.setModel(model);  // Este es el JTable de clientes
     // Añadir el evento para manejar la selección de una fila en la tabla
-    jTableEmpleados.getSelectionModel().addListSelectionListener(e -> {
-        if (!e.getValueIsAdjusting() && jTableEmpleados.getSelectedRow() != -1) {
-            int row = jTableEmpleados.getSelectedRow();
-            int id = Integer.parseInt(jTableEmpleados.getValueAt(row, 0).toString());
+    jTableClientes.getSelectionModel().addListSelectionListener(e -> {
+        if (!e.getValueIsAdjusting() && jTableClientes.getSelectedRow() != -1) {
+            int row = jTableClientes.getSelectedRow();
+            int id = Integer.parseInt(jTableClientes.getValueAt(row, 0).toString());
             EnviarDatosClienteSeleccionado(id);
         }
     });
@@ -787,7 +797,6 @@ private void EnviarDatosClienteSeleccionado(int idCliente) {
         e.printStackTrace();  // Imprimir errores para ayudar con la depuración
     }
 }
-
 
 
 
