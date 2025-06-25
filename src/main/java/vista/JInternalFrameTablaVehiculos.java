@@ -22,16 +22,29 @@ import java.util.Vector;
  */
 public class JInternalFrameTablaVehiculos extends javax.swing.JInternalFrame {
 
-    
+
     public JInternalFrameTablaVehiculos() {
         initComponents();
         this.setSize(new Dimension(894, 553));
         //this.setExtendedState(this.MAXIMIZED_BOTH);
         this.setTitle("Clientes");
         this.setSize(new Dimension(894, 553));
+        BuscarVehiculoBoton.addActionListener(new java.awt.event.ActionListener() {
+    public void actionPerformed(java.awt.event.ActionEvent evt) {
+        String placa = BuscarVehiculo.getText().trim();
+
+        if (placa.isEmpty()) {
+            CargarTablaVehiculos(); // Muestra todo
+        } else {
+            buscarVehiculoPorPlaca(placa); // Filtra
+        }
+    }
+});
+
         
         this.setTitle("Vehículos");
         this.CargarTablaVehiculos();
+        
     }
 
     /**
@@ -67,6 +80,8 @@ public class JInternalFrameTablaVehiculos extends javax.swing.JInternalFrame {
             ColorVehiculos = new javax.swing.JComboBox<>();
             TipoVehiculo = new javax.swing.JComboBox<>();
             LunasPolarizadasL = new javax.swing.JComboBox<>();
+            BuscarVehiculo = new javax.swing.JTextField();
+            BuscarVehiculoBoton = new javax.swing.JButton();
 
             setClosable(true);
             setIconifiable(true);
@@ -170,6 +185,15 @@ public class JInternalFrameTablaVehiculos extends javax.swing.JInternalFrame {
             jPanel6.add(LunasPolarizadasL, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 30, 180, -1));
 
             jPanel1.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 370, 860, 120));
+            jPanel1.add(BuscarVehiculo, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 190, 100, -1));
+
+            BuscarVehiculoBoton.setText("BUSCAR");
+            BuscarVehiculoBoton.addKeyListener(new java.awt.event.KeyAdapter() {
+                public void keyTyped(java.awt.event.KeyEvent evt) {
+                    BuscarVehiculoBotonKeyTyped(evt);
+                }
+            });
+            jPanel1.add(BuscarVehiculoBoton, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 230, 100, -1));
 
             getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 890, 520));
 
@@ -194,8 +218,14 @@ String text = NumPlacaVehiculos.getText(); // texto actual
 
     }//GEN-LAST:event_NumPlacaVehiculosKeyTyped
 
+    private void BuscarVehiculoBotonKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BuscarVehiculoBotonKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BuscarVehiculoBotonKeyTyped
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField BuscarVehiculo;
+    private javax.swing.JButton BuscarVehiculoBoton;
     private javax.swing.JComboBox<String> ColorVehiculos;
     private javax.swing.JComboBox<String> LunasPolarizadasL;
     private javax.swing.JTextField MarcaVehiculo;
@@ -252,7 +282,61 @@ private void CargarTablaVehiculos() {
     }
 
     jTableVehiculos.setModel(model);
+    jTableVehiculos.getSelectionModel().addListSelectionListener(e -> {
+    if (!e.getValueIsAdjusting() && jTableVehiculos.getSelectedRow() != -1) {
+        int row = jTableVehiculos.getSelectedRow();
+
+        NumPlacaVehiculos.setText(jTableVehiculos.getValueAt(row, 0).toString());
+        ColorVehiculos.setSelectedItem(jTableVehiculos.getValueAt(row, 1).toString());
+        LunasPolarizadasL.setSelectedItem(jTableVehiculos.getValueAt(row, 2).toString());
+        MarcaVehiculo.setText(jTableVehiculos.getValueAt(row, 3).toString());
+        ModeloVehiculo.setText(jTableVehiculos.getValueAt(row, 4).toString());
+        TipoVehiculo.setSelectedItem(jTableVehiculos.getValueAt(row, 5).toString());
+    }
+});
 }
+private void buscarVehiculoPorPlaca(String placa) {
+    DefaultTableModel model = new DefaultTableModel();
+    model.addColumn("NroPlaca");
+    model.addColumn("Color");
+    model.addColumn("Lunas_Polarizadas");
+    model.addColumn("Marca");
+    model.addColumn("Modelo");
+    model.addColumn("TipoVehiculo");
+
+    String sql = "SELECT V.NroPlaca, C.Nombre AS Color, V.Lunas_Polarizadas, " +
+                 "M.Nombre AS Marca, M.Nombre AS Modelo, T.Nombre AS TipoVehiculo " +
+                 "FROM Vehiculos V " +
+                 "JOIN Color C ON V.CodColor = C.CodColor " +
+                 "JOIN Marca_Modelo M ON V.CodMarcaModelo = M.CodMarcaModelo " +
+                 "JOIN Tipo_Vehiculo T ON V.CodTipoVhc = T.CodTipoVhc " +
+                 "WHERE V.NroPlaca LIKE ?";
+
+    try (Connection cn = Conexion.establecerConexion();
+         PreparedStatement pst = cn.prepareStatement(sql)) {
+
+        pst.setString(1, placa + "%");  // Buscar por inicio de placa
+
+        try (ResultSet rs = pst.executeQuery()) {
+            while (rs.next()) {
+                Object[] fila = new Object[6];
+                for (int i = 0; i < fila.length; i++) {
+                    fila[i] = rs.getObject(i + 1);
+                }
+                model.addRow(fila);
+            }
+        }
+
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(null, "Error al buscar vehículos: " + e.getMessage());
+    }
+
+    jTableVehiculos.setModel(model);
+}
+
+
+
+
 
 }
 
