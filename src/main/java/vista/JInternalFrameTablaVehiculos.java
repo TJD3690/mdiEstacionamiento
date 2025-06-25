@@ -21,14 +21,16 @@ import java.util.Vector;
  * @author LENOVO
  */
 public class JInternalFrameTablaVehiculos extends javax.swing.JInternalFrame {
+    
 
 
     public JInternalFrameTablaVehiculos() {
         initComponents();
+        EliminarBotonVehiculo.addActionListener(e -> eliminarVehiculo());
+
         this.setSize(new Dimension(894, 553));
         //this.setExtendedState(this.MAXIMIZED_BOTH);
-        this.setTitle("Clientes");
-        this.setSize(new Dimension(894, 553));
+        this.setTitle("Vehículos");
         BuscarVehiculoBoton.addActionListener(new java.awt.event.ActionListener() {
     public void actionPerformed(java.awt.event.ActionEvent evt) {
         String placa = BuscarVehiculo.getText().trim();
@@ -39,12 +41,21 @@ public class JInternalFrameTablaVehiculos extends javax.swing.JInternalFrame {
             buscarVehiculoPorPlaca(placa); // Filtra
         }
     }
-});
+    
+}
+        
+        );
 
         
         this.setTitle("Vehículos");
         this.CargarTablaVehiculos();
         
+        ActualizarBoton.addActionListener(new java.awt.event.ActionListener() {
+    public void actionPerformed(java.awt.event.ActionEvent evt) {
+        actualizarVehiculo();
+    }
+});
+
     }
 
     /**
@@ -65,8 +76,8 @@ public class JInternalFrameTablaVehiculos extends javax.swing.JInternalFrame {
                 return false;  // nunca editable
             }};
             jPanel4 = new javax.swing.JPanel();
-            jButton1 = new javax.swing.JButton();
-            jButton2 = new javax.swing.JButton();
+            ActualizarBoton = new javax.swing.JButton();
+            EliminarBotonVehiculo = new javax.swing.JButton();
             jPanel6 = new javax.swing.JPanel();
             jLabel4 = new javax.swing.JLabel();
             ModeloVehiculo = new javax.swing.JTextField();
@@ -125,16 +136,16 @@ public class JInternalFrameTablaVehiculos extends javax.swing.JInternalFrame {
             jPanel4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
             jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-            jButton1.setText("ACTUALIZAR");
-            jButton1.addActionListener(new java.awt.event.ActionListener() {
+            ActualizarBoton.setText("ACTUALIZAR");
+            ActualizarBoton.addActionListener(new java.awt.event.ActionListener() {
                 public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    jButton1ActionPerformed(evt);
+                    ActualizarBotonActionPerformed(evt);
                 }
             });
-            jPanel4.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
+            jPanel4.add(ActualizarBoton, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
 
-            jButton2.setText("ELIMINAR");
-            jPanel4.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 100, -1));
+            EliminarBotonVehiculo.setText("ELIMINAR");
+            jPanel4.add(EliminarBotonVehiculo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 100, -1));
 
             jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 60, 140, 90));
 
@@ -200,9 +211,9 @@ public class JInternalFrameTablaVehiculos extends javax.swing.JInternalFrame {
             pack();
         }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void ActualizarBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ActualizarBotonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_ActualizarBotonActionPerformed
 
     private void NumPlacaVehiculosKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NumPlacaVehiculosKeyTyped
 String text = NumPlacaVehiculos.getText(); // texto actual 
@@ -224,16 +235,16 @@ String text = NumPlacaVehiculos.getText(); // texto actual
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton ActualizarBoton;
     private javax.swing.JTextField BuscarVehiculo;
     private javax.swing.JButton BuscarVehiculoBoton;
     private javax.swing.JComboBox<String> ColorVehiculos;
+    private javax.swing.JButton EliminarBotonVehiculo;
     private javax.swing.JComboBox<String> LunasPolarizadasL;
     private javax.swing.JTextField MarcaVehiculo;
     private javax.swing.JTextField ModeloVehiculo;
     private javax.swing.JTextField NumPlacaVehiculos;
     private javax.swing.JComboBox<String> TipoVehiculo;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel4;
@@ -295,6 +306,7 @@ private void CargarTablaVehiculos() {
     }
 });
 }
+
 private void buscarVehiculoPorPlaca(String placa) {
     DefaultTableModel model = new DefaultTableModel();
     model.addColumn("NroPlaca");
@@ -333,8 +345,129 @@ private void buscarVehiculoPorPlaca(String placa) {
 
     jTableVehiculos.setModel(model);
 }
+private void eliminarVehiculo() {
+    int fila = jTableVehiculos.getSelectedRow();
+    if (fila == -1) {
+        JOptionPane.showMessageDialog(this, "Selecciona un vehículo para eliminar.");
+        return;
+    }
+
+    String nroPlaca = jTableVehiculos.getValueAt(fila, 0).toString(); // Columna 0 = NroPlaca
+
+    int confirm = JOptionPane.showConfirmDialog(this, "¿Estás seguro de eliminar el vehículo con placa: " + nroPlaca + "?", "Confirmar", JOptionPane.YES_NO_OPTION);
+    if (confirm != JOptionPane.YES_OPTION) return;
+
+    String sql = "DELETE FROM Vehiculos WHERE NroPlaca = ?";
+
+    try (Connection cn = Conexion.establecerConexion();
+         PreparedStatement pst = cn.prepareStatement(sql)) {
+
+        pst.setString(1, nroPlaca);
+        int filasAfectadas = pst.executeUpdate();
+
+        if (filasAfectadas > 0) {
+            JOptionPane.showMessageDialog(this, "Vehículo eliminado correctamente.");
+            CargarTablaVehiculos(); // recargar la tabla
+        } else {
+            JOptionPane.showMessageDialog(this, "No se pudo eliminar el vehículo.");
+        }
+
+    } catch (SQLException e) {
+        e.printStackTrace();
+        JOptionPane.showMessageDialog(this, "Error al eliminar: " + e.getMessage());
+    }
+}
 
 
+
+private void actualizarVehiculo() {
+    int fila = jTableVehiculos.getSelectedRow();
+
+    if (fila == -1) {
+        JOptionPane.showMessageDialog(null, "Seleccione un vehículo para actualizar.");
+        return;
+    }
+
+    String placa = NumPlacaVehiculos.getText().trim();
+    String color = (String) ColorVehiculos.getSelectedItem();
+    String lunas = (String) LunasPolarizadasL.getSelectedItem();
+    String tipo = (String) TipoVehiculo.getSelectedItem();
+    String marca = MarcaVehiculo.getText().trim();
+    String modelo = ModeloVehiculo.getText().trim();
+
+    if (placa.isEmpty() || color.equals("No Especificado") || tipo.equals("No Especificado") || marca.isEmpty() || modelo.isEmpty()) {
+        JOptionPane.showMessageDialog(null, "Complete todos los campos.");
+        return;
+    }
+
+    int codColor = getCodColor(color);
+    int codTipo = getCodTipoVehiculo(tipo);
+    int codMarcaModelo = getCodMarcaModelo(marca, modelo);
+
+    String sql = "UPDATE Vehiculos SET CodColor = ?, CodTipoVhc = ?, CodMarcaModelo = ?, Lunas_Polarizadas = ? WHERE NroPlaca = ?";
+
+    try (Connection cn = Conexion.establecerConexion();
+         PreparedStatement pst = cn.prepareStatement(sql)) {
+
+        pst.setInt(1, codColor);
+        pst.setInt(2, codTipo);
+        pst.setInt(3, codMarcaModelo);
+        pst.setString(4, lunas);
+        pst.setString(5, placa);
+
+        int rowsAffected = pst.executeUpdate();
+        if (rowsAffected > 0) {
+            JOptionPane.showMessageDialog(null, "Vehículo actualizado correctamente.");
+            CargarTablaVehiculos();
+        } else {
+            JOptionPane.showMessageDialog(null, "No se pudo actualizar el vehículo.");
+        }
+
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(null, "Error al actualizar vehículo: " + e.getMessage());
+        e.printStackTrace();
+    }
+}
+
+private int getCodColor(String nombre) {
+    try (Connection cn = Conexion.establecerConexion();
+         PreparedStatement pst = cn.prepareStatement("SELECT CodColor FROM Color WHERE Nombre = ?")) {
+        pst.setString(1, nombre);
+        try (ResultSet rs = pst.executeQuery()) {
+            if (rs.next()) return rs.getInt("CodColor");
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return 0;
+}
+
+private int getCodTipoVehiculo(String nombre) {
+    try (Connection cn = Conexion.establecerConexion();
+         PreparedStatement pst = cn.prepareStatement("SELECT CodTipoVhc FROM Tipo_Vehiculo WHERE Nombre = ?")) {
+        pst.setString(1, nombre);
+        try (ResultSet rs = pst.executeQuery()) {
+            if (rs.next()) return rs.getInt("CodTipoVhc");
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return 0;
+}
+
+private int getCodMarcaModelo(String marca, String modelo) {
+    try (Connection cn = Conexion.establecerConexion();
+         PreparedStatement pst = cn.prepareStatement(
+             "SELECT CodMarcaModelo FROM Marca_Modelo WHERE Nombre = ?")) {
+        pst.setString(1, modelo);
+        try (ResultSet rs = pst.executeQuery()) {
+            if (rs.next()) return rs.getInt("CodMarcaModelo");
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return 0;
+}
 
 
 
