@@ -93,6 +93,7 @@ public class JInternalFrameTablaVehiculos extends javax.swing.JInternalFrame {
             LunasPolarizadasL = new javax.swing.JComboBox<>();
             BuscarVehiculo = new javax.swing.JTextField();
             BuscarVehiculoBoton = new javax.swing.JButton();
+            jLabel2 = new javax.swing.JLabel();
 
             setClosable(true);
             setIconifiable(true);
@@ -206,6 +207,9 @@ public class JInternalFrameTablaVehiculos extends javax.swing.JInternalFrame {
             });
             jPanel1.add(BuscarVehiculoBoton, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 230, 100, -1));
 
+            jLabel2.setText("DNI:");
+            jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 170, 60, -1));
+
             getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 890, 520));
 
             pack();
@@ -247,6 +251,7 @@ String text = NumPlacaVehiculos.getText(); // texto actual
     private javax.swing.JComboBox<String> TipoVehiculo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
