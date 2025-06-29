@@ -1,7 +1,7 @@
 package vista;
 
 import java.awt.Dimension;
-
+import javax.swing.JDesktopPane;
 /**
  *
  * @author LENOVO
@@ -11,10 +11,16 @@ public class JInternalFrameRegEntrada extends javax.swing.JInternalFrame {
     /**
      * Creates new form JInternalFrameRegEntrada
      */
+    
+    
     public JInternalFrameRegEntrada() {
         initComponents();
-        this.setSize(new Dimension(400,200));
+        this.setSize(new Dimension(400, 460));
         this.setTitle("Registro Entrada");
+        
+        /*JDesktopPane_regEn= new JDesktopPane();
+        JDesktopPane_regEn.setBounds(0, 0, 400, 460);
+        this.add(JDesktopPane_regEn);*/
     }
 
     /**
@@ -46,6 +52,7 @@ public class JInternalFrameRegEntrada extends javax.swing.JInternalFrame {
         txtNombresNUsuario = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -138,7 +145,7 @@ public class JInternalFrameRegEntrada extends javax.swing.JInternalFrame {
         jPanel1.add(txtTelefonoNUsuario);
         txtTelefonoNUsuario.setBounds(200, 200, 180, 22);
         jPanel1.add(txtCorreoNUsuario);
-        txtCorreoNUsuario.setBounds(200, 230, 180, 22);
+        txtCorreoNUsuario.setBounds(200, 230, 140, 22);
         jPanel1.add(cbxDireccionNUsuario);
         cbxDireccionNUsuario.setBounds(200, 260, 180, 22);
 
@@ -155,7 +162,7 @@ public class JInternalFrameRegEntrada extends javax.swing.JInternalFrame {
         jPanel1.add(txtNombresNUsuario);
         txtNombresNUsuario.setBounds(200, 50, 180, 22);
 
-        jButton1.setText("REGISTRAR");
+        jButton1.setText("LIMPIAR");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -172,6 +179,15 @@ public class JInternalFrameRegEntrada extends javax.swing.JInternalFrame {
         });
         jPanel1.add(jButton2);
         jButton2.setBounds(80, 330, 110, 23);
+
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/calendario_calendario.png"))); // NOI18N
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton3);
+        jButton3.setBounds(350, 230, 30, 20);
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 390, 430));
 
@@ -253,11 +269,19 @@ public class JInternalFrameRegEntrada extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        JInternalCalendario calendario= new JInternalCalendario();
+        MenuPrincipal.JDesktopPane_menu.add(calendario);
+        calendario.toFront();
+        calendario.setVisible(true);       
+     }//GEN-LAST:event_jButton3ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField cbxDireccionNUsuario;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel14;

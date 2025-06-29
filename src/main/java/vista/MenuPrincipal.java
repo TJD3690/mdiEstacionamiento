@@ -3,6 +3,7 @@ package vista;
 import java.awt.Dimension;
 import javax.swing.JDesktopPane;
 
+
 public class MenuPrincipal extends javax.swing.JFrame {
 
     public static JDesktopPane JDesktopPane_menu; 
@@ -21,6 +22,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
         int alto=java.awt.Toolkit.getDefaultToolkit().getScreenSize().height;
         this.JDesktopPane_menu.setBounds(0,0,ancho,alto-110);//En qué posicion aparece el jdesktop
         this.add(JDesktopPane_menu);
+        
+        JInternalCalendario jInternalFrame2 = new JInternalCalendario();
+        this.add(jInternalFrame2);
         
     }
 
@@ -202,7 +206,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private void jRegistrarSalidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRegistrarSalidaActionPerformed
         JInternalFrameRegSalida interRegSalida = new JInternalFrameRegSalida();
         JDesktopPane_menu.add(interRegSalida);
-        interRegSalida.setVisible(true);
+        interRegSalida.show();
     }//GEN-LAST:event_jRegistrarSalidaActionPerformed
 
     private void jTablaVehiculosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTablaVehiculosActionPerformed
