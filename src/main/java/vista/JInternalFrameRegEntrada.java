@@ -7,7 +7,6 @@ import javax.swing.JDesktopPane;
  * @author LENOVO
  */
 public class JInternalFrameRegEntrada extends javax.swing.JInternalFrame {
-
     /**
      * Creates new form JInternalFrameRegEntrada
      */
@@ -47,7 +46,7 @@ public class JInternalFrameRegEntrada extends javax.swing.JInternalFrame {
         txtNUsuario = new javax.swing.JTextField();
         txtContraNUsuario = new javax.swing.JTextField();
         txtTelefonoNUsuario = new javax.swing.JTextField();
-        txtCorreoNUsuario = new javax.swing.JTextField();
+        fechaField = new javax.swing.JTextField();
         cbxDireccionNUsuario = new javax.swing.JTextField();
         txtNombresNUsuario = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
@@ -69,32 +68,32 @@ public class JInternalFrameRegEntrada extends javax.swing.JInternalFrame {
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel2.setText("IdEntrada:");
         jPanel1.add(jLabel2);
-        jLabel2.setBounds(20, 50, 70, 20);
+        jLabel2.setBounds(20, 50, 80, 20);
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel3.setText("IdCliente:");
         jPanel1.add(jLabel3);
-        jLabel3.setBounds(20, 80, 57, 20);
+        jLabel3.setBounds(20, 80, 70, 20);
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel4.setText("Nro de Placa:");
         jPanel1.add(jLabel4);
-        jLabel4.setBounds(20, 140, 80, 20);
+        jLabel4.setBounds(20, 140, 90, 20);
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel5.setText("Nivel:");
         jPanel1.add(jLabel5);
-        jLabel5.setBounds(20, 170, 33, 20);
+        jLabel5.setBounds(20, 170, 50, 20);
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel6.setText("Zona:");
         jPanel1.add(jLabel6);
-        jLabel6.setBounds(20, 200, 34, 20);
+        jLabel6.setBounds(20, 200, 50, 20);
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel7.setText("Fecha:");
         jPanel1.add(jLabel7);
-        jLabel7.setBounds(20, 230, 38, 20);
+        jLabel7.setBounds(20, 230, 50, 20);
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel11.setText("Hora:");
@@ -104,7 +103,7 @@ public class JInternalFrameRegEntrada extends javax.swing.JInternalFrame {
         jLabel14.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel14.setText("Numero de Documento:");
         jPanel1.add(jLabel14);
-        jLabel14.setBounds(20, 110, 148, 20);
+        jLabel14.setBounds(20, 110, 160, 20);
         jPanel1.add(txtNumDocNUsuario);
         txtNumDocNUsuario.setBounds(200, 110, 180, 22);
 
@@ -144,8 +143,10 @@ public class JInternalFrameRegEntrada extends javax.swing.JInternalFrame {
         });
         jPanel1.add(txtTelefonoNUsuario);
         txtTelefonoNUsuario.setBounds(200, 200, 180, 22);
-        jPanel1.add(txtCorreoNUsuario);
-        txtCorreoNUsuario.setBounds(200, 230, 140, 22);
+
+        fechaField.setEditable(false);
+        jPanel1.add(fechaField);
+        fechaField.setBounds(200, 230, 140, 22);
         jPanel1.add(cbxDireccionNUsuario);
         cbxDireccionNUsuario.setBounds(200, 260, 180, 22);
 
@@ -279,6 +280,7 @@ public class JInternalFrameRegEntrada extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField cbxDireccionNUsuario;
+    private javax.swing.JTextField fechaField;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -294,7 +296,6 @@ public class JInternalFrameRegEntrada extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField txtApellidosNUsuario;
     private javax.swing.JTextField txtContraNUsuario;
-    private javax.swing.JTextField txtCorreoNUsuario;
     private javax.swing.JTextField txtNUsuario;
     private javax.swing.JTextField txtNombresNUsuario;
     private javax.swing.JTextField txtNumDocNUsuario;

@@ -70,59 +70,9 @@ public class JInternalFrameTablaClientes extends javax.swing.JInternalFrame {
     jPanel1.add(BuscarCLienteBoton, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 240, 100, -1));
     jPanel1.add(BuscarCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 200, 100, -1));
     }
-    // Método para buscar clientes por DNI
-private void buscarClientePorDni(String dni) {
-    DefaultTableModel model = new DefaultTableModel();
-    model.addColumn("IdCliente");
-    model.addColumn("Nacionalidad");
-    model.addColumn("Sexo");
-    model.addColumn("Distrito");
-    model.addColumn("Nombres");
-    model.addColumn("Apellidos");
-    model.addColumn("NumDoc");
-    model.addColumn("NroLicencia");
-    model.addColumn("Telefono");
-    model.addColumn("Correo");
-    model.addColumn("Direccion");
-    model.addColumn("Usuario");
-
-    // Consulta SQL para buscar clientes por el DNI
-    String sql = "SELECT C.IdCliente, N.Nombre AS Nacionalidad, " +
-             "       S.Nombre AS Sexo, D.Nombre AS Distrito, " +
-             "       C.Nombres, C.Apellidos, C.NumDoc, C.NroLicencia, C.Telefono, " +
-             "       C.Correo, C.Direccion, C.Usuario " +
-             "FROM Cliente C " +
-             "JOIN Nacionalidad N ON C.CodNacio = N.CodNacio " +
-             "JOIN Sexo S ON C.CodSexo = S.CodSexo " +  // Relacionamos con la tabla Sexo
-             "JOIN Distrito D ON C.CodDistrito = D.CodDistrito " +
-             "WHERE C.NumDoc LIKE ?";  // Usamos LIKE para buscar coincidencias parciales
+    
 
 
-
-    try (Connection cn = Conexion.establecerConexion();
-         PreparedStatement pst = cn.prepareStatement(sql)) {
-
-        // Establecer el valor del DNI en la consulta
-        pst.setString(1, dni + "%");  // "%" permite buscar cualquier coincidencia
-
-        try (ResultSet rs = pst.executeQuery()) {
-            // Recorrer el resultado y agregar los datos a la tabla
-            while (rs.next()) {
-                Object[] fila = new Object[12];  // 112 columnas en la tabla
-                for (int i = 0; i < fila.length; i++) {
-                    fila[i] = rs.getObject(i + 1);  // Llenar cada fila con los datos de la consulta
-                }
-                model.addRow(fila);  // Agregar la fila al modelo de tabla
-            }
-        }
-
-    } catch (SQLException e) {
-        e.printStackTrace();
-    }
-
-    // Actualizar la tabla con los resultados de la búsqueda
-    jTableClientes.setModel(model);  // Actualiza la tabla con los resultados
-}
     
 
     private void cargarDistritosAutoCompletar(JComboBox comboBox) {
@@ -232,6 +182,7 @@ private void buscarClientePorDni(String dni) {
             MujerCliente = new javax.swing.JRadioButton();
             BuscarCLienteBoton = new javax.swing.JButton();
             BuscarCliente = new javax.swing.JTextField();
+            ClienteComboBox = new javax.swing.JComboBox<>();
 
             setClosable(true);
             setIconifiable(true);
@@ -262,7 +213,10 @@ private void buscarClientePorDni(String dni) {
             jPanel2.setLayout(jPanel2Layout);
             jPanel2Layout.setHorizontalGroup(
                 jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 710, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 698, Short.MAX_VALUE)
+                    .addContainerGap())
             );
             jPanel2Layout.setVerticalGroup(
                 jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -445,14 +399,17 @@ private void buscarClientePorDni(String dni) {
                     BuscarCLienteBotonActionPerformed(evt);
                 }
             });
-            jPanel1.add(BuscarCLienteBoton, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 240, 100, -1));
+            jPanel1.add(BuscarCLienteBoton, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 270, 110, -1));
 
             BuscarCliente.addActionListener(new java.awt.event.ActionListener() {
                 public void actionPerformed(java.awt.event.ActionEvent evt) {
                     BuscarClienteActionPerformed(evt);
                 }
             });
-            jPanel1.add(BuscarCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 200, 100, -1));
+            jPanel1.add(BuscarCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 170, 110, -1));
+
+            ClienteComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nombres", "Apellidos", "Nacionalidad", "Distrito", "Direccion", "NroLicencia", "NumDoc", "Telefono", "Usuario", "Correo", "Sexo" }));
+            jPanel1.add(ClienteComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 220, 110, 20));
 
             getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 890, 520));
 
@@ -614,15 +571,14 @@ if (!Character.isLetterOrDigit(c)) {
     }//GEN-LAST:event_NumLicenciaKeyTyped
 
     private void BuscarCLienteBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarCLienteBotonActionPerformed
-  // Obtener el texto del campo de búsqueda
-    String dni = BuscarCliente.getText().trim();  // Obtener el DNI o número de documento
+    String campo = ClienteComboBox.getSelectedItem().toString();
+    String valor = BuscarCliente.getText().trim();
 
-    if (dni.isEmpty()) {
-        // Si el campo está vacío, mostrar todos los clientes
-        CargarTablaClientes();  // Este método cargará todos los clientes
+    if (valor.isEmpty()) {
+        CargarTablaClientes();
     } else {
-        // Si se ha ingresado un DNI, realizar la búsqueda
-        buscarClientePorDni(dni);
+        buscarClientePorCampo(campo, valor);
+    
     }    }//GEN-LAST:event_BuscarCLienteBotonActionPerformed
 
     private void MujerClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MujerClienteActionPerformed
@@ -645,6 +601,7 @@ if (!Character.isLetterOrDigit(c)) {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BuscarCLienteBoton;
     private javax.swing.JTextField BuscarCliente;
+    private javax.swing.JComboBox<String> ClienteComboBox;
     private javax.swing.JComboBox<String> DistritoCLiente;
     private javax.swing.JButton EliminarBotonCliente;
     private javax.swing.JRadioButton HombreCliente;
@@ -799,6 +756,69 @@ private void EnviarDatosClienteSeleccionado(int idCliente) {
 }
 
 
+private void buscarClientePorCampo(String campo, String valor) {
+    DefaultTableModel model = new DefaultTableModel();
+    model.addColumn("IdCliente");
+    model.addColumn("Nacionalidad");
+    model.addColumn("Sexo");
+    model.addColumn("Distrito");
+    model.addColumn("Nombres");
+    model.addColumn("Apellidos");
+    model.addColumn("NumDoc");
+    model.addColumn("NroLicencia");
+    model.addColumn("Telefono");
+    model.addColumn("Correo");
+    model.addColumn("Direccion");
+    model.addColumn("Usuario");
+
+    // Determinar si el campo viene de una tabla relacionada o directamente de Cliente
+    String campoReal;
+    switch (campo) {
+        case "Nacionalidad":
+            campoReal = "N.Nombre";
+            break;
+        case "Sexo":
+            campoReal = "S.Nombre";
+            break;
+        case "Distrito":
+            campoReal = "D.Nombre";
+            break;
+        default:
+            campoReal = "C." + campo;
+            break;
+    }
+
+    String sql = "SELECT C.IdCliente, N.Nombre AS Nacionalidad, S.Nombre AS Sexo, " +
+                 "D.Nombre AS Distrito, C.Nombres, C.Apellidos, C.NumDoc, " +
+                 "C.NroLicencia, C.Telefono, C.Correo, C.Direccion, C.Usuario " +
+                 "FROM Cliente C " +
+                 "JOIN Nacionalidad N ON C.CodNacio = N.CodNacio " +
+                 "JOIN Sexo S ON C.CodSexo = S.CodSexo " +
+                 "JOIN Distrito D ON C.CodDistrito = D.CodDistrito " +
+                 "WHERE " + campoReal + " LIKE ?";
+
+    try (Connection cn = Conexion.establecerConexion();
+         PreparedStatement pst = cn.prepareStatement(sql)) {
+
+        pst.setString(1, valor + "%");  // Solo comienza con...
+
+        try (ResultSet rs = pst.executeQuery()) {
+            while (rs.next()) {
+                Object[] fila = new Object[12];
+                for (int i = 0; i < fila.length; i++) {
+                    fila[i] = rs.getObject(i + 1);
+                }
+                model.addRow(fila);
+            }
+        }
+
+    } catch (SQLException e) {
+        e.printStackTrace();
+        JOptionPane.showMessageDialog(null, "Error al buscar: " + e.getMessage());
+    }
+
+    jTableClientes.setModel(model);
+}
 
 
 

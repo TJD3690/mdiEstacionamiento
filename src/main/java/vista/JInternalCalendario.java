@@ -8,14 +8,89 @@ package vista;
  *
  * @author LENOVO
  */
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.util.Calendar;
+
 public class JInternalCalendario extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form JInternalCalendario
-     */
+    private JButton ultimoBotonSeleccionado;  // Variable para almacenar el último botón seleccionado
+
     public JInternalCalendario() {
-        initComponents();
+        initComponents();  // Este método no debe ser modificado, es generado automáticamente
+        inicializarFechaHoy();  // Establecer la fecha de hoy por defecto
+        configurarComboBoxes();  // Configurar los ComboBoxes (Año y Mes)
+        agregarListeners();  // Llamar a este método para agregar los listeners
     }
+    private void agregarListeners() {
+        CancelarBoton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();  // Cierra la ventana del calendario
+            }
+        });
+    }
+    
+
+    // Método para configurar los ComboBoxes de Año y Mes
+    private void configurarComboBoxes() {
+        // Añadir años al ComboBox (ahora de 1900 a 2100)
+        for (int i = 1900; i <= 2100; i++) {
+            año.addItem(String.valueOf(i));  // Añadir años del 1900 al 2100
+        }
+
+        // Añadir meses al ComboBox
+        mes.addItem("Enero");
+        mes.addItem("Febrero");
+        mes.addItem("Marzo");
+        mes.addItem("Abril");
+        mes.addItem("Mayo");
+        mes.addItem("Junio");
+        mes.addItem("Julio");
+        mes.addItem("Agosto");
+        mes.addItem("Septiembre");
+        mes.addItem("Octubre");
+        mes.addItem("Noviembre");
+        mes.addItem("Diciembre");
+
+        // Asignar la fecha inicial del sistema para los ComboBox (año y mes)
+        Calendar today = Calendar.getInstance();
+        int añoHoy = today.get(Calendar.YEAR);
+        int mesHoy = today.get(Calendar.MONTH);  // El mes actual, de 0 (enero) a 11 (diciembre)
+        
+        // Asegúrate de que el ComboBox de Año y Mes esté seleccionado correctamente al inicio
+        año.setSelectedItem(String.valueOf(añoHoy));  // Establece el año actual
+        mes.setSelectedIndex(mesHoy);  // Establece el mes actual (0 para enero, 11 para diciembre)
+
+        // Actualizar el calendario con los valores actuales de Año y Mes
+        mostrarCalendario();
+
+        // Configurar ActionListener para cambiar el calendario cuando se seleccione un año o mes
+        año.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                // Asegurarse de que el año seleccionado no sea nulo antes de continuar
+                if (año.getSelectedItem() != null && mes.getSelectedItem() != null) {
+                    mostrarCalendario();  // Actualizar el calendario
+                }
+            }
+        });
+
+        mes.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                // Asegurarse de que el mes seleccionado no sea nulo antes de continuar
+                if (año.getSelectedItem() != null && mes.getSelectedItem() != null) {
+                    mostrarCalendario();  // Actualizar el calendario
+                }
+            }
+        });
+    }
+
+
+
+
+
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -26,24 +101,277 @@ public class JInternalCalendario extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        año = new javax.swing.JComboBox<>();
+        mes = new javax.swing.JComboBox<>();
+        panelCalendario = new javax.swing.JPanel();
+        AceptarCalendario = new javax.swing.JButton();
+        CancelarBoton = new javax.swing.JButton();
+        campoFecha = new javax.swing.JTextField();
+        jButton3 = new javax.swing.JButton();
+
         setClosable(true);
         setIconifiable(true);
+        setTitle("Calendario");
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel1.setText("Año");
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel3.setText("Mes");
+
+        año.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        mes.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        javax.swing.GroupLayout panelCalendarioLayout = new javax.swing.GroupLayout(panelCalendario);
+        panelCalendario.setLayout(panelCalendarioLayout);
+        panelCalendarioLayout.setHorizontalGroup(
+            panelCalendarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 425, Short.MAX_VALUE)
+        );
+        panelCalendarioLayout.setVerticalGroup(
+            panelCalendarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 187, Short.MAX_VALUE)
+        );
+
+        AceptarCalendario.setText("Aceptar");
+        AceptarCalendario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AceptarCalendarioActionPerformed(evt);
+            }
+        });
+        AceptarCalendario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                AceptarCalendarioKeyTyped(evt);
+            }
+        });
+
+        CancelarBoton.setText("Cancelar");
+
+        campoFecha.setEditable(false);
+
+        jButton3.setText("Fecha Actual");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 394, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(panelCalendario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(año, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 133, Short.MAX_VALUE)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(mes, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(175, 175, 175)
+                .addComponent(campoFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton3)
+                .addGap(18, 18, 18)
+                .addComponent(AceptarCalendario)
+                .addGap(29, 29, 29)
+                .addComponent(CancelarBoton)
+                .addGap(79, 79, 79))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 274, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(campoFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel3)
+                    .addComponent(año, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(mes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(panelCalendario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(AceptarCalendario)
+                    .addComponent(CancelarBoton)
+                    .addComponent(jButton3))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void AceptarCalendarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_AceptarCalendarioKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_AceptarCalendarioKeyTyped
+
+    private void AceptarCalendarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AceptarCalendarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_AceptarCalendarioActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton AceptarCalendario;
+    private javax.swing.JButton CancelarBoton;
+    private javax.swing.JComboBox<String> año;
+    private javax.swing.JTextField campoFecha;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JComboBox<String> mes;
+    private javax.swing.JPanel panelCalendario;
     // End of variables declaration//GEN-END:variables
+
+        
+private void inicializarFechaHoy() {
+    Calendar today = Calendar.getInstance();
+    int añoHoy = today.get(Calendar.YEAR);
+    int mesHoy = today.get(Calendar.MONTH);  // Los meses van de 0 (enero) a 11 (diciembre)
+    
+    // Asegurarse de que el año y el mes no sean nulos
+    if (año.getSelectedItem() != null && mes.getSelectedItem() != null) {
+        // Establecer el año y mes actual en los combos
+        año.setSelectedItem(String.valueOf(añoHoy));  // Establece el año actual
+        mes.setSelectedIndex(mesHoy);  // Establece el mes actual (0 para enero, 11 para diciembre)
+
+        // Verificar que el mes no se salga del rango (de 0 a 11)
+        if (mesHoy < 0 || mesHoy > 11) {
+            mesHoy = 0;  // Si el mes actual es inválido, seleccionar Enero
+        }
+
+        // Mostrar el calendario con la fecha actual
+        mostrarCalendario();
+
+        // Establecer la fecha en el campo de texto
+        
+    }
+    campoFecha.setText(añoHoy + "-" + (mesHoy + 1) + "-" + today.get(Calendar.DAY_OF_MONTH));
+    
 }
+
+    // Método para mostrar el calendario
+private void mostrarCalendario() {
+        panelCalendario.removeAll();  // Limpiar el panel antes de agregar el nuevo calendario
+
+        // Comprobar si el ComboBox de Año y Mes tienen valores seleccionados
+        if (año.getSelectedItem() == null || mes.getSelectedItem() == null) {
+            return;  // Si algún valor es nulo, no proceder
+        }
+
+        try {
+            // Obtener el año y mes seleccionados
+            int añoSeleccionado = Integer.parseInt((String) año.getSelectedItem());
+            int mesSeleccionado = mes.getSelectedIndex();  // Obtener el índice del mes seleccionado
+
+            // Crear el calendario para el mes seleccionado
+            Calendar cal = Calendar.getInstance();
+            cal.set(Calendar.YEAR, añoSeleccionado);
+            cal.set(Calendar.MONTH, mesSeleccionado);
+            cal.set(Calendar.DAY_OF_MONTH, 1);  // Establecer el primer día del mes
+
+            int diasDelMes = cal.getActualMaximum(Calendar.DAY_OF_MONTH);  // Número de días en el mes
+            int primerDia = cal.get(Calendar.DAY_OF_WEEK);  // Día de la semana en que comienza el mes
+
+            // Crear la cuadrícula del calendario con GridLayout (7 columnas para los días de la semana)
+            panelCalendario.setLayout(new GridLayout(0, 7));  // 7 columnas para los días de la semana
+
+            // Añadir los días de la semana
+            String[] dias = {"Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"};
+            for (String dia : dias) {
+                panelCalendario.add(new JLabel(dia, SwingConstants.CENTER));
+            }
+
+            // Rellenar los días del mes con botones
+            int diaActual = 1;
+            for (int i = 1; i < primerDia; i++) {
+                panelCalendario.add(new JLabel("", SwingConstants.CENTER));  // Espacio vacío antes del primer día
+            }
+
+            // Añadir botones para los días del mes
+            for (int i = primerDia; i <= 7; i++) {
+                JButton button = new JButton(String.valueOf(diaActual));
+                button.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        // Restaurar el color del último botón seleccionado (si hay uno)
+                        if (ultimoBotonSeleccionado != null) {
+                            ultimoBotonSeleccionado.setBackground(null);  // Restaurar al color original
+                        }
+
+                        // Cambiar el color del botón al hacer clic (color azul claro)
+                        button.setBackground(new Color(173, 216, 230));  // Azul claro profesional
+
+                        // Actualizar el campo de texto con la fecha seleccionada
+                        campoFecha.setText(año.getSelectedItem() + "-" + (mes.getSelectedIndex() + 1) + "-" + button.getText());
+
+                        // Guardar el último botón seleccionado
+                        ultimoBotonSeleccionado = button;
+                    }
+                });
+                panelCalendario.add(button);  // Añadir botón para el día
+                diaActual++;
+            }
+
+            while (diaActual <= diasDelMes) {
+                for (int i = 1; i <= 7 && diaActual <= diasDelMes; i++) {
+                    JButton button = new JButton(String.valueOf(diaActual));
+                    button.addActionListener(new ActionListener() {
+                        public void actionPerformed(ActionEvent e) {
+                            // Restaurar el color del último botón seleccionado (si hay uno)
+                            if (ultimoBotonSeleccionado != null) {
+                                ultimoBotonSeleccionado.setBackground(null);  // Restaurar al color original
+                            }
+
+                            // Cambiar el color del botón al hacer clic (color azul claro)
+                            button.setBackground(new Color(173, 216, 230));  // Azul claro profesional
+
+                            // Actualizar el campo de texto con la fecha seleccionada
+                            campoFecha.setText(año.getSelectedItem() + "-" + (mes.getSelectedIndex() + 1) + "-" + button.getText());
+
+                            // Guardar el último botón seleccionado
+                            ultimoBotonSeleccionado = button;
+                        }
+                    });
+                    panelCalendario.add(button);  // Añadir botón para el día
+                    diaActual++;
+                }
+            }
+
+            // Actualizar la vista del panel
+            panelCalendario.revalidate();
+            panelCalendario.repaint();
+
+        } catch (NumberFormatException e) {
+            // Manejar el error si no se puede convertir el año a número
+            System.out.println("Error al convertir el año: " + e.getMessage());
+        }
+    }
+private void agregarActionListenerCancelar() {
+    CancelarBoton.addActionListener(new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            dispose();  // Cierra la ventana del calendario al hacer clic en "Cancelar"
+        }
+    });
+}
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
